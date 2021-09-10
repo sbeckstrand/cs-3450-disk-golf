@@ -17,7 +17,7 @@ Prerequisits:
 Clone Repository
 
 ```
-git@github.com:sbeckstrand/cs-3450-disk-golf.git
+git clone git@github.com:sbeckstrand/cs-3450-disk-golf.git
 cd cs-3450-disk-golf
 ```
 
