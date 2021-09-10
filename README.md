@@ -23,7 +23,7 @@ cd cs-3450-disk-golf
 
 ### Backend
 
-Install `pipevn` and start Virtual Environment
+Install `pipenv` and start Virtual Environment
 
 ```
 pip install pipenv
