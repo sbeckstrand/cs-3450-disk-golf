@@ -1,9 +1,8 @@
 Summary of Project:
-	The goal of this project is to create a working webapp that allows users to particpate in a disk golf tourament and order drinks.  Higher level permissions are the drink meister,
-sponsors, ...........
+	The goal of this project is to create a working webapp that allows users to particpate in a disk golf tourament and order drinks.  Higher level permissions are the drink meister, sponsors, ...........
 
 Team Organization
-
+	The four members of our team are Stephen Beckstrand, Brandon Hicken, Vinny Smith, and Brandon Stone.  We are dividing tasks according by being assigned them by the current spring master using a Jira board
 
 Overall Software Development Process
 
