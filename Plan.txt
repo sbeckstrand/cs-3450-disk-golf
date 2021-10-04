@@ -1,0 +1,14 @@
+Summary of Project:
+	The goal of this project is to create a working webapp that allows users to particpate in a disk golf tourament and order drinks.  Higher level permissions are the drink meister,
+sponsors, ...........
+
+Team Organization
+
+
+Overall Software Development Process
+
+
+Policies, procedures, or tools for communication
+
+
+Risk analysis
