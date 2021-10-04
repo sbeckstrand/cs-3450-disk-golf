@@ -8,7 +8,12 @@ Sponsors -- Advertiser for drinks and pays for tournaments.
 The version control is going to be handled utilizing github's available tools.  We will be cloning the MAIN branch, and then submitting pull requests.
 Once a pull request for a feature is made, another member of the team that didn't write that code will read through it and merge it into MAIN.
 ## Tool stack description and setup procedure
-	
+	Github
+	Discord
+	Zoom
+	Jira
+	Python
+	Django Framework
 ## Build instructions
 ### Prerequisits:
 
