@@ -80,7 +80,7 @@ For our low-fidelity protype, a wireframe of what the dashboard will look like w
 
 As mentioned, we have creating issues and tracking sprints in JIRA. From the main dashboard, it does not show when tasks were completed, however, this data would likely not be very helpful anyway as we have not been as consistent as we should be about updating JIRAs with comments and marking them as complete. We often just communicate changes in discord. I have gone ahead and included a screenshot of this dashboard, though you can also find progress via our [pull request history](https://github.com/sbeckstrand/cs-3450-disk-golf/pulls?q=is%3Apr+is%3Aclosed). 
 
-![JIRA Dashboard](docs/requirements/sprint02/scrumboard.png)
+![JIRA Dashboard](scrumboard.png)
 
 
 
