@@ -24,7 +24,7 @@ Each of the items listed should be small enough to handle by a single person in 
 
 All of this informaiton should be included excluding the unit and system testing as we have not reached this state yet. There are also not any steps for frontend deployment as this does not yet exist. 
 
-[Link to README](README.md)
+[Link to README](/README.md)
 
 ### Project Plan
 
@@ -54,7 +54,7 @@ All of this information should be included.
 
 ### Use Case Diagrams
 
-[Link to Use Case Diagrams]((/docs/diagrams/use_case_diagrams))
+[Link to Use Case Diagrams](/docs/diagrams/use_case_diagrams)
 
 ### Class Diagram(s)
 
@@ -64,7 +64,7 @@ We actually split this up into two separate diagrams, both of which reflect the 
 
 ### Activity Diagrams
 
-[Link to Use Activity Diagrams]((/docs/diagrams/activity_diagrams))
+[Link to Use Activity Diagrams](/docs/diagrams/activity_diagrams)
 
 ### High-Fidelity Protype
 
@@ -74,7 +74,7 @@ We are actually using the backend itself as our High-Fidelity protype as it is i
 
 For our low-fidelity protype, a wireframe of what the dashboard will look like was created. 
 
-![Link to dashboard outline](/docs/screens/Dashboard.png)
+![Link to dashboard outline](/docs/sceens/Dashboard.png)
 
 #### History of Scrum board showing who is working which items and when items are completed: 
 
