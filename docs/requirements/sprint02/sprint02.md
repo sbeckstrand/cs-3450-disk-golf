@@ -70,6 +70,10 @@ We actually split this up into two separate diagrams, both of which reflect the 
 
 We are actually using the backend itself as our High-Fidelity protype as it is interactive and can already be used to read and write data via both a web interface and curl commands. 
 
+You can see this yourself by deploying the application using the steps in our README, running the backend, and then browsing to http://127.0.0.1:8000/api . From here you can interact with existing object types such as Tournaments, Scores, or Drinks. You can even create new objects from this web interface or with PUT,GET requests via command line. 
+
+If you would rather just watch us showcase it, a video can be found [here](https://youtu.be/4VhszgMIBBI)
+
 ### Low-Fidelity Prototype
 
 For our low-fidelity protype, a wireframe of what the dashboard will look like was created. 
