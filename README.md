@@ -1,12 +1,18 @@
 # Disk Golf tournament organization web application. Designed by CS-3450 - Council of the Brandons
 
-## An explanation of the organization and name scheme for the workspace
-Drink Miester -- prepares the different drinks.
-Manager -- Creates tournaments. Picks winner and concludes that the game is finished.
-Sponsors -- Advertiser for drinks and pays for tournaments.
+## Workspace Naming Scheme / Structure
+
+API/Backend - /backend
+
+Documentation/Diagrams - /docs
+
+Frontend - /frontend (eventually)
+
 ## Version-control procedures
+
 The version control is going to be handled utilizing github's available tools.  We will be cloning the MAIN branch, and then submitting pull requests.
 Once a pull request for a feature is made, another member of the team that didn't write that code will read through it and merge it into MAIN.
+
 ## Tool stack description and setup procedure
 	Github
 	Discord
@@ -14,7 +20,9 @@ Once a pull request for a feature is made, another member of the team that didn'
 	Jira
 	Python
 	Django Framework
+
 ## Build instructions
+
 ### Prerequisits:
 
 - Python 3.x ![Installation Steps](https://docs.python.org/3/using/index.html)
@@ -50,9 +58,12 @@ python manage.py runserver
 
 ### Frontend
 See Nuxt Documentation: https://nuxtjs.org/docs/get-started
+
 ## Unit testing instructions
 	--TODO--
+
 ## System testing instructions
 	--TODO--
+	
 ## Other development notes, as needed
 	
