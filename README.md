@@ -46,7 +46,7 @@ pipenv shell
 Install Django and other dependencies for the application
 
 ```
-pipenv install django django-rest-framework django-cors-headers
+pipenv install django django-rest-framework djangorestframework-simplejwt django-cors-headers npm
 ```
 
 Populate database with placeholder data and run application
@@ -58,6 +58,13 @@ python manage.py runserver
 
 ### Frontend
 See Nuxt Documentation: https://nuxtjs.org/docs/get-started
+
+Install needed Node modules (may need to be run as root):
+
+```
+cd frontend
+npm install 
+```
 
 ## Unit testing instructions
 	--TODO--
