@@ -6,7 +6,7 @@ router = DefaultRouter()
 router.register(r'tournaments', TournamentViewSet)
 router.register(r'scores', ScoreViewSet)
 router.register(r'drinks', DrinkViewSet)
-router.register(r'drinkOrder', DrinkOrderViewSet)
+router.register(r'orders', DrinkOrderViewSet)
 
 urlpatterns = [
 	path("", include(router.urls))
