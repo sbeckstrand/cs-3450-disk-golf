@@ -5,7 +5,7 @@
     <div v-for="drink in drinks" :key="drink.name">
         <b-col>
             <b-card
-                :title= drinks.Name
+                :title= "drinks.Name"
                 tag="article"
                 style="max-width: 20rem;"
                 class="mb-2"
