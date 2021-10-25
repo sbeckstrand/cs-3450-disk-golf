@@ -8,7 +8,7 @@
     <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
             <b-nav-item href="#">Dashboard</b-nav-item>
-            <b-nav-item href="#">Drinks</b-nav-item>
+            <b-nav-item href="drinks">Drinks</b-nav-item>
             <b-nav-item href="tournaments">Tournaments</b-nav-item>
         </b-navbar-nav>
 

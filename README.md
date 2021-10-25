@@ -64,6 +64,7 @@ Install needed Node modules (may need to be run as root):
 ```
 cd frontend
 npm install 
+npm run dev
 ```
 
 ## Unit testing instructions
