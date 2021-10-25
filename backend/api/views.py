@@ -17,6 +17,6 @@ class DrinkViewSet(viewsets.ModelViewSet):
 	serializer_class = DrinkSerializer
 	queryset = Drink.objects.all()
 
-class DrinkOrderViewSet(viewsets):
+class DrinkOrderViewSet(viewsets.ModelViewSet):
 	serializer_class = DrinkOrderSerializer
 	queryset = DrinkOrder.objects.all()
