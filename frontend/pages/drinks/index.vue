@@ -3,7 +3,7 @@
     <Nav/>
     <div v-for="drink in drinks" :key="drink.name">
     <b-card
-        title="drinks.Name"
+        :title= drinks.Name
         tag="article"
         style="max-width: 20rem;"
         class="mb-2"
@@ -15,7 +15,7 @@
                 {{drink.description}}
             </b-card-text>
             <b-card-text>
-                {{drink.type}}
+                Type: {{drink.type}}
             </b-card-text>
 
         <b-button href="#" variant="primary">Order (Placeholder for now)</b-button>

@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
 from api.models import Tournament, Score, Drink, Role, Finance
+from backend.api.models import DrinkOrder
 
 
 class RoleInline(admin.StackedInline):
@@ -23,3 +24,4 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Tournament)
 admin.site.register(Score)
 admin.site.register(Drink)
+admin.site.register(DrinkOrder)

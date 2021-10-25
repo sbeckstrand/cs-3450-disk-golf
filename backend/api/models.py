@@ -41,4 +41,6 @@ class Drink(models.Model):
 	def __str__(self):
 		return "{}".format(self.name)
 
-	
+class DrinkOrder(models.Model):
+	drink = models.ForeignKey(Drink, on_delete=models.CASCADE)
+	client = models.ForeignKey(User, on_delete=models.CASCADE)
