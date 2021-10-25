@@ -3,18 +3,22 @@
     <Nav/>
     <div v-for="drink in drinks" :key="drink.name">
     <b-card
-        :title="drinks.Name"
+        title="drinks.Name"
         tag="article"
         style="max-width: 20rem;"
         class="mb-2"
     >
             <b-card-text>
-            ${{drink.price}}
-            {{drink.description}}
-            {{drink.type}}
+                ${{drink.price}}
+            </b-card-text>
+            <b-card-text>
+                {{drink.description}}
+            </b-card-text>
+            <b-card-text>
+                {{drink.type}}
             </b-card-text>
 
-        <b-button href="#" variant="primary">Go somewhere</b-button>
+        <b-button href="#" variant="primary">Order (Placeholder for now)</b-button>
     </b-card>
         </div>
   </div>
