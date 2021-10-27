@@ -2,7 +2,7 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render
 from rest_framework import viewsets
 from .serializers import DrinkOrderSerializer, TournamentSerializer, ScoreSerializer, DrinkSerializer
-from .models import DrinksOrder, Tournament, Score, Drink
+from .models import DrinkOrder, Tournament, Score, Drink
 
 # Create your views here.
 class TournamentViewSet(viewsets.ModelViewSet):
@@ -17,6 +17,6 @@ class DrinkViewSet(viewsets.ModelViewSet):
 	serializer_class = DrinkSerializer
 	queryset = Drink.objects.all()
 
-class DrinkOrderViewSet(viewsets):
+class DrinkOrderViewSet(viewsets.ModelViewSet):
 	serializer_class = DrinkOrderSerializer
-	queryset = DrinksOrder.objects.all()
+	queryset = DrinkOrder.objects.all()
