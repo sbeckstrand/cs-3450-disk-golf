@@ -53,7 +53,6 @@
             type="signup">
             {{ editableTournament.id ? 'Edit' : 'Create' }}
         </b-button>
-        {{ editableTournament }}
     </b-form>
 </template>
 
@@ -70,10 +69,9 @@ export default {
     watch: {
         tournament: {
             handler (tournament) {
-                if (tournament && tournament.id ) {
+                if (tournament) {
                     console.log(tournament)
                     this.editableTournament = tournament
-
                 }
             },
             deep: true,
@@ -88,17 +86,24 @@ export default {
                 if (this.tournament && this.tournament.id) {
                     url = `/api/tournaments/${this.tournament.id}/`
                     context = "edite"
+                    await this.$axios.put(url, {
+                        name: this.tournament.name,
+                        description: this.tournament.description,
+                        holes: this.tournament.holes,
+                        participants: this.tournament.participants,
+                        startDate: this.tournament.startDate + " " + this.tournament.startTime
+                    });
                 } else {
                     url = `/api/tournaments/`
                     context = "create"
+                    await this.$axios.post(url, {
+                        name: this.tournament.name,
+                        description: this.tournament.description,
+                        holes: this.tournament.holes,
+                        participants: this.tournament.participants,
+                        startDate: this.tournament.startDate + " " + this.tournament.startTime
+                    });
                 }
-                await this.$axios.put(url, {
-                    name: this.tournament.name,
-                    description: this.tournament.description,
-                    holes: this.tournament.holes,
-                    participants: this.tournament.participants,
-                    startDate: this.tournament.startDate + " " + this.tournament.startTime
-                });
                 this.$router.push("/tournaments/");
                 this.$toasted.global.defaultSuccess({
                     msg: `Tournament ${context}d`
