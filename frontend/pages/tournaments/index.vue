@@ -35,7 +35,7 @@ export default {
         async delTournament(tournament) {
             try {
                 const tournamentIndex = this.tournaments.findIndex(t => t.id === tournament.id)
-                await this.$axios.delete(`/api/tournaments/'${tournament.id}`)
+                await this.$axios.delete(`/api/tournaments/${tournament.id}`)
                 this.tournaments.splice(tournamentIndex, 1)
             } catch (err) {
                 console.log(err)

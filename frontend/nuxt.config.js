@@ -73,7 +73,6 @@ export default {
 
   toast: {
     position: 'top-center',
-    iconPack: 'fonttawesome',
     duration: 3000,
     register: [
       {
@@ -82,7 +81,6 @@ export default {
           !payload.msg ? 'Login Successful!' : payload.msg,
         options: {
           type: 'success',
-          icon: 'check'
         }
       },
       {
@@ -91,7 +89,6 @@ export default {
           !payload.msg ? 'Login Unsuccessful :(' : payload.msg,
         options: {
           type: 'error',
-          icon: 'times'
         }
       }
     ]
