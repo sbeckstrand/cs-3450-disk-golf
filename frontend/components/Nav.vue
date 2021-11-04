@@ -21,8 +21,16 @@
                 <template #button-content>
                     <em>User</em>
                 </template>
-                <b-dropdown-item href="#">Profile</b-dropdown-item>
-                <b-dropdown-item href="logout">Sign Out</b-dropdown-item>
+                <div v-if="$auth.loggedIn">
+                  <b-dropdown-item href="#">Profile</b-dropdown-item>
+                  <b-dropdown-item href="/logout">Sign Out</b-dropdown-item>
+                </div>
+                <div v-else>
+                  <b-dropdown-item href="/login">Log In</b-dropdown-item>
+                </div>
+                
+
+                
             </b-nav-item-dropdown>
         </div>
       </b-navbar-nav>
@@ -33,8 +41,12 @@
 
 <script>
 export default {
-
+  created() {
+    console.log(this.$auth.loggedIn)
+  }
 }
+
+
 </script>
 
 <style>
