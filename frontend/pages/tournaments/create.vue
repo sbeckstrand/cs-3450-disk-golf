@@ -83,6 +83,7 @@ export default {
                     participants: this.tournament.participants,
                     startDate: this.tournament.startDate + " " + this.tournament.startTime
                 });
+                console.log(this.tournament.startTime)
                 this.$router.push("/tournaments/");
                 this.$toasted.global.defaultSuccess({
                     msg: "Tournament: " + this.tournament.name + " Created"
