@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import DrinkOrderViewSet, TournamentViewSet, ScoreViewSet, DrinkViewSet
+from .views import DrinkOrderViewSet, TournamentViewSet, ScoreViewSet, DrinkViewSet, create_auth
 
 router = DefaultRouter()
 router.register(r'tournaments', TournamentViewSet)
@@ -9,5 +9,6 @@ router.register(r'drinks', DrinkViewSet)
 router.register(r'orders', DrinkOrderViewSet)
 
 urlpatterns = [
-	path("", include(router.urls))
+	path("", include(router.urls)),
+	path("signup/", create_auth)
 ]

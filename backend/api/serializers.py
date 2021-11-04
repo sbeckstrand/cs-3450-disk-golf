@@ -25,3 +25,19 @@ class DrinkOrderSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = DrinkOrder
 		fields = ("id", "drink", "client")
+
+class UserSerializer(serializers.ModelSerializer):
+	password = serializers.CharField(write_only=True)
+
+	def create(self, data):
+		user = User.objects.create_user(
+			username=data['username'],
+			email=data['email'],
+			password=data['password']
+		)
+
+		return user
+	
+	class Meta:
+		model = User
+		fields = ("id", "username", "email", "password")
