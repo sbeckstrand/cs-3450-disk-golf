@@ -1,15 +1,15 @@
 <template>
   <div>
       <b-navbar toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand href="#">NavBar</b-navbar-brand>
+    <b-navbar-brand href="/">Disk Golf</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-            <b-nav-item href="#">Dashboard</b-nav-item>
-            <b-nav-item href="drinks">Drinks</b-nav-item>
-            <b-nav-item href="tournaments">Tournaments</b-nav-item>
+            <b-nav-item href="/dashboard">Dashboard</b-nav-item>
+            <b-nav-item href="/drinks">Drinks</b-nav-item>
+            <b-nav-item href="/tournaments">Tournaments</b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
