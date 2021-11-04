@@ -15,7 +15,7 @@
         <b-navbar-nav class="ml-auto">
     
 
-        <div :v-if="isLoggedIn">
+        <div>
             <b-nav-item-dropdown right>
                 <!-- Using 'button-content' slot -->
                 <template #button-content>
