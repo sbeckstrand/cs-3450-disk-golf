@@ -28,6 +28,11 @@ class DrinkOrderViewSet(viewsets.ModelViewSet):
 	serializer_class = DrinkOrderSerializer
 	queryset = DrinkOrder.objects.all()
 
+# Currently returning all users, not sure how to limit the query to requested user
+class UserViewSet(viewsets.ModelViewSet):
+	serializer_class = UserSerializer
+	queryset = User.objects.all()
+
 @api_view(['POST'])
 @authentication_classes([])
 @permission_classes([])
