@@ -48,7 +48,8 @@ def create_auth(request):
 	else:
 		print(serialized._errors)
 		return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
-
+		
+# TODO FIX THIS SHIT
 @csrf_exempt
 def createDrinkOrder(request):
 	user = request.user
