@@ -49,8 +49,8 @@ def create_auth(request):
 
 @api_view(['POST'])
 @csrf_exempt
-def orderDrink(request):
+def createDrinkOrder(request):
 	user = request.user
-	drink = Drink.objects.get(request.POST.drinkID)
+	drink = Drink.objects.get(request.drinkID)
 	order = DrinkOrder(client=user,drink=drink)
 	order.save()
