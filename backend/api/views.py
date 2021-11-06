@@ -52,9 +52,8 @@ def create_auth(request):
 @csrf_exempt
 def createDrinkOrder(request):
 	user = request.user
-	print(request.POST.get("name"))
-	id = request.POST.get("id") - 1
-	drink = Drink.objects.get(pk = id )
+	id = request.POST.get("id") 
+	drink = Drink.objects.get(id = 2 )
 	order = DrinkOrder(client=user,drink=drink)
 	order.save()
 

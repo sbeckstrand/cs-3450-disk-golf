@@ -43,10 +43,8 @@ export default {
                 context = "ordere"
                 console.log(drink.name)
                 console.log(drink.id)
-                await this.$axios.post(url, {
-                    name: drink.name,
-                    id: drink.id
-                });
+                const data = {"name" : drink.name, id : drink.id}
+                await this.$axios.post(url, data);
                 
                 this.$router.push("/orderDrink/");
                 this.$toasted.global.defaultSuccess({
