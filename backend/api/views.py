@@ -47,10 +47,9 @@ def create_auth(request):
 		print(serialized._errors)
 		return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['POST'])
 @csrf_exempt
 def createDrinkOrder(request):
 	user = request.user
-	drink = Drink.objects.get(request.drinkID)
+	drink = Drink.objects.get(pk = request.POST.get("id"))
 	order = DrinkOrder(client=user,drink=drink)
 	order.save()
