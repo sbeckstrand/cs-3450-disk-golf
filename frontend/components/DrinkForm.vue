@@ -26,6 +26,7 @@
         <b-form-input
             v-model="editableDrink.price"
             type="number"
+            step=".01"
             required>
         </b-form-input>
 
