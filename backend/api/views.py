@@ -48,13 +48,12 @@ def create_auth(request):
 	else:
 		print(serialized._errors)
 		return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
-		
-# TODO FIX THIS SHIT
+# TODO fix this
 @csrf_exempt
 def createDrinkOrder(request):
 	user = request.user
 	print(request.POST.get("name"))
-	id = request.POST.get("id")
+	id = request.POST.get("id") - 1
 	drink = Drink.objects.get(pk = id )
 	order = DrinkOrder(client=user,drink=drink)
 	order.save()

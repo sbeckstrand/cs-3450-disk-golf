@@ -48,7 +48,7 @@ export default {
                     id: drink.id
                 });
                 
-                this.$router.push("/drinks/");
+                this.$router.push("/orderDrink/");
                 this.$toasted.global.defaultSuccess({
                     msg: `Drink ${context}d`
                 })
