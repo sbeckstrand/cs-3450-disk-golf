@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <Nav />
-        <b-container>
+  <div>
+      <Nav />
+      <b-container>
             <b-row class="d-flex justify-content-center">
                 <b-col cols="12" md="6">
                     <DrinkForm :drink="drink"/>
@@ -9,16 +9,13 @@
             </b-row>
         </b-container>
   </div>
-  
-  
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            drink: {}
-        }
+    async asyncData({ params, $axios }) {
+        const drink = await $axios.$get(`/api/drinks/${params.id}`)
+        return { drink }
     }
 }
 </script>
