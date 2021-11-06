@@ -11,7 +11,7 @@
             <b-nav-item href="/drinks">Drinks</b-nav-item>
             <b-nav-item href="/tournaments">Tournaments</b-nav-item>
             <!-- TODO add auth to drink Orders and drink master, create drink orders page --->
-            <b-nav-item href="/">Drink Orders</b-nav-item>
+            <b-nav-item href="/drinkOrders">Drink Orders</b-nav-item>
             <b-nav-item href="/drinkMaster">Drink Master</b-nav-item>
         </b-navbar-nav>
 

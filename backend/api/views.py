@@ -47,3 +47,8 @@ def create_auth(request):
 		print(serialized._errors)
 		return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
 
+def createDrinkOrder(request):
+	user = request.user
+	drink = Drink.objects.get(request.drinkID)
+	order = DrinkOrder(client=user,drink=drink)
+	order.save()
