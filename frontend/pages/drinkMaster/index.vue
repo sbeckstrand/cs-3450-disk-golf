@@ -35,7 +35,7 @@ export default {
             try {
                 const drinkIndex = this.drinks.findIndex(t => t.id === drink.id)
                 await this.$axios.delete(`/api/drinks/${drink.id}`)
-                this.tournaments.splice(drinkIndex, 1)
+                this.drinks.splice(drinkIndex, 1)
             } catch (err) {
                 console.log(err)
                 this.$toasted.global.defaultError({

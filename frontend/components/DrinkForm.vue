@@ -58,7 +58,7 @@ export default {
         drink: Object
     },
     watch: {
-        droml: {
+        drink: {
             handler (drink) {
                 if (drink) {
                     console.log(drink)
