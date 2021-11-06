@@ -13,5 +13,4 @@ urlpatterns = [
 	path("", include(router.urls)),
 	path("signup/", create_auth),
 	path("orderDrink/", createDrinkOrder),
-	path("getUser/", getUser)
 ]

@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from django.core import serializers
 
 # Create your views here.
 class TournamentViewSet(viewsets.ModelViewSet):
@@ -56,7 +57,5 @@ def createDrinkOrder(request):
 	order = DrinkOrder(client=user,drink=drink)
 	order.save()
 
-@csrf_exempt
-def getUser(request):
-	currUser = request.user
-	return JsonResponse({currUser})
+
+	
