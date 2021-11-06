@@ -1,11 +1,12 @@
 from django.db.models.query import QuerySet
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import viewsets, permissions, status
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from .serializers import DrinkOrderSerializer, TournamentSerializer, ScoreSerializer, DrinkSerializer, UserSerializer
-from .models import DrinkOrder, Tournament, Score, Drink
+from .models import DrinkOrder, Tournament, Score, Drink, Role
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
@@ -54,3 +55,10 @@ def createDrinkOrder(request):
 	drink = Drink.objects.get(name = request.POST.get("name"))
 	order = DrinkOrder(client=user,drink=drink)
 	order.save()
+
+@csrf_exempt
+def getUser(request):
+	currUser = request.user
+	role = Role.objects.get(user = currUser)
+	data = {currUser, role}
+	return JsonResponse(data)
