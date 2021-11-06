@@ -5,13 +5,13 @@
     <div v-for="order in drinkOrders" :key="order.client">
         <b-col>
             <b-card
-                :title= "order.client.username"
+                :title= "users[order.client-1].username"
                 tag="article"
                 style="max-width: 20rem;"
                 class="mb-2"
             >
                     <b-card-text>
-                        ${{order.drink.name}}
+                        {{drinks[order.drink-1].name}}
                     </b-card-text>
                     <b-button class="mt-3"
                     variant="danger"
@@ -31,7 +31,9 @@
 export default {
     async asyncData({ $axios, $config }) {
             const drinkOrders = await $axios.$get('/api/orders/')
-            return { drinkOrders }
+            const users = await $axios.$get('/api/users/')
+            const drinks = await $axios.$get('/api/drinks/')
+            return { drinkOrders,users,drinks }
         },
         methods: {
             async delOrder(order) {
@@ -45,6 +47,9 @@ export default {
                     msg: "Failed to fill order."
                 }) 
             }
+            },
+            async getInfo(order){
+
             }
         }
 }
