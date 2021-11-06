@@ -26,6 +26,7 @@
         <b-form-input
             v-model="editableDrink.price"
             type="number"
+            step=".01"
             required>
         </b-form-input>
 
@@ -57,7 +58,7 @@ export default {
         drink: Object
     },
     watch: {
-        droml: {
+        drink: {
             handler (drink) {
                 if (drink) {
                     console.log(drink)

@@ -20,7 +20,7 @@
                         Type: {{drink.type}}
                     </b-card-text>
 
-                <b-button href="#" variant="primary">Order (Placeholder for now)</b-button>
+                <b-button @click="placeOrder(drink)" variant="primary">Order (Placeholder for now)</b-button>
             </b-card>
         </b-col> 
         </div>
@@ -33,6 +33,33 @@ export default {
     async asyncData({ $axios, $config }) {
             const drinks = await $axios.$get('/api/drinks/')
             return { drinks }
+        },
+        methods: {
+           async placeOrder(drink){
+               try {
+                let url = ""
+                let context = ""
+                url = `/api/orderDrink/`
+                context = "ordere"
+                console.log(drink.name)
+                console.log(drink.id)
+                await this.$axios.post(url, {
+                    name: drink.name,
+                    id: drink.id
+                });
+                
+                this.$router.push("/drinks/");
+                this.$toasted.global.defaultSuccess({
+                    msg: `Drink ${context}d`
+                })
+            }
+            catch (err) {
+                console.log(err)
+                this.$toasted.global.defaultError({
+                    msg: `Failed to order drink.`
+                })       
+            }
+           }
         }
 }
 </script>

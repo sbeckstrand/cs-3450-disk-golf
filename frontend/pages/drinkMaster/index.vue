@@ -10,12 +10,12 @@
             {{ drink }} 
             <b-button class="mt-3"
                 variant="danger"
-                @click="delTournament(tournament)">
+                @click="delDrink(drink)">
                 Delete
             </b-button>
             <b-button class="mt-3"
                 variant="secondary"
-                :href="'/tournaments/edit/' + tournament.id">
+                :href="'/drinkMaster/edit/' + drink.id">
                 
                 Edit
             </b-button>
@@ -29,7 +29,21 @@ export default {
     async asyncData({ $axios, $config }) {
             const drinks = await $axios.$get('/api/drinks/')
             return { drinks }
+        },
+        methods: {
+        async delDrink(drink) {
+            try {
+                const drinkIndex = this.drinks.findIndex(t => t.id === drink.id)
+                await this.$axios.delete(`/api/drinks/${drink.id}`)
+                this.drinks.splice(drinkIndex, 1)
+            } catch (err) {
+                console.log(err)
+                this.$toasted.global.defaultError({
+                    msg: "Failed to delete drink."
+                }) 
+            }
         }
+    }
 }
 </script>
 

@@ -1,15 +1,17 @@
 from django.db.models.query import QuerySet
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import viewsets, permissions, status
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from .serializers import DrinkOrderSerializer, TournamentSerializer, ScoreSerializer, DrinkSerializer, UserSerializer
-from .models import DrinkOrder, Tournament, Score, Drink
+from .models import DrinkOrder, Tournament, Score, Drink, Role
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from django.core import serializers
 
 # Create your views here.
 class TournamentViewSet(viewsets.ModelViewSet):
@@ -47,3 +49,14 @@ def create_auth(request):
 		print(serialized._errors)
 		return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
 
+@csrf_exempt
+def createDrinkOrder(request):
+	user = request.user
+	print(request.POST.get("name"))
+	id = request.POST.get("id")
+	drink = Drink.objects.get(pk = id )
+	order = DrinkOrder(client=user,drink=drink)
+	order.save()
+
+
+	

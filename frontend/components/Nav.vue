@@ -10,6 +10,9 @@
             <b-nav-item href="/dashboard">Dashboard</b-nav-item>
             <b-nav-item href="/drinks">Drinks</b-nav-item>
             <b-nav-item href="/tournaments">Tournaments</b-nav-item>
+            <!-- TODO add auth to drink Orders and drink master, create drink orders page --->
+            <b-nav-item href="/drinkOrders">Drink Orders</b-nav-item>
+            <b-nav-item href="/drinkMaster">Drink Master</b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
@@ -19,7 +22,12 @@
             <b-nav-item-dropdown right>
                 <!-- Using 'button-content' slot -->
                 <template #button-content>
-                    <em>User</em>
+                    <div v-if="!$auth.loggedIn">
+                      <em>Log In</em>
+                    </div>
+                    <div v-else>
+                      <em> TODO GET USERNAME </em>
+                    </div>
                 </template>
                 <div v-if="$auth.loggedIn">
                   <b-dropdown-item href="#">Profile</b-dropdown-item>
@@ -27,6 +35,7 @@
                 </div>
                 <div v-else>
                   <b-dropdown-item href="/login">Log In</b-dropdown-item>
+                  <b-dropdown-item href="/signup">Sign Up</b-dropdown-item>
                 </div>
                 
 
@@ -43,7 +52,8 @@
 export default {
   created() {
     console.log(this.$auth.loggedIn)
-  }
+    
+  },
 }
 
 
