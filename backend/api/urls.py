@@ -12,5 +12,5 @@ router.register(r'users', UserViewSet)
 urlpatterns = [
 	path("", include(router.urls)),
 	path("signup/", create_auth),
-	path("drinkOrdered",createDrinkOrder)
+	path("orderDrink/",createDrinkOrder)
 ]
