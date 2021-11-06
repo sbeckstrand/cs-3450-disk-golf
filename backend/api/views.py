@@ -53,7 +53,8 @@ def create_auth(request):
 def createDrinkOrder(request):
 	user = request.user
 	print(request.POST.get("name"))
-	drink = Drink.objects.get(name = request.POST.get("name"))
+	id = request.POST.get("id")
+	drink = Drink.objects.get(pk = id )
 	order = DrinkOrder(client=user,drink=drink)
 	order.save()
 
