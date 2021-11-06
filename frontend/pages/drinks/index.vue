@@ -20,7 +20,7 @@
                         Type: {{drink.type}}
                     </b-card-text>
 
-                <b-button href="" @click="placeOrder(drink)" variant="primary">Order (Placeholder for now)</b-button>
+                <b-button @click="placeOrder(drink)" variant="primary">Order (Placeholder for now)</b-button>
             </b-card>
         </b-col> 
         </div>
