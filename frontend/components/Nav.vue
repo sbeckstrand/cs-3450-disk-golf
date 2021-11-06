@@ -30,6 +30,7 @@
                 </div>
                 <div v-else>
                   <b-dropdown-item href="/login">Log In</b-dropdown-item>
+                  <b-dropdown-item href="/signup">Sign Up</b-dropdown-item>
                 </div>
                 
 
