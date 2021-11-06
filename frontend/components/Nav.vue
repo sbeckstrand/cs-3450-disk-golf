@@ -22,7 +22,12 @@
             <b-nav-item-dropdown right>
                 <!-- Using 'button-content' slot -->
                 <template #button-content>
-                    <em>User</em>
+                    <div v-if="!$auth.loggedIn">
+                      <em>Log In</em>
+                    </div>
+                    <div v-else>
+                      <em> TODO GET USERNAME </em>
+                    </div>
                 </template>
                 <div v-if="$auth.loggedIn">
                   <b-dropdown-item href="#">Profile</b-dropdown-item>
@@ -47,7 +52,8 @@
 export default {
   created() {
     console.log(this.$auth.loggedIn)
-  }
+    
+  },
 }
 
 

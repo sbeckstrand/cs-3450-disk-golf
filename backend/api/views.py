@@ -59,6 +59,4 @@ def createDrinkOrder(request):
 @csrf_exempt
 def getUser(request):
 	currUser = request.user
-	role = Role.objects.get(user = currUser)
-	data = {currUser, role}
-	return JsonResponse(data)
+	return JsonResponse(currUser)
