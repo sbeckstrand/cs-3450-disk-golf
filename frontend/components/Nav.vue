@@ -6,7 +6,7 @@
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
+        <b-navbar-nav v-if="$auth.loggedIn">
             <b-nav-item href="/dashboard">Dashboard</b-nav-item>
             <b-nav-item href="/drinks">Drinks</b-nav-item>
             <b-nav-item href="/tournaments">Tournaments</b-nav-item>
@@ -26,7 +26,7 @@
                       <em>Log In</em>
                     </div>
                     <div v-else>
-                      <em> TODO GET USERNAME </em>
+                      <em> {{ $auth.user.username }} </em>
                     </div>
                 </template>
                 <div v-if="$auth.loggedIn">

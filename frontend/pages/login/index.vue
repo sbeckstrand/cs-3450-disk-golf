@@ -50,6 +50,7 @@ export default {
                 this.$toasted.global.defaultSuccess({
                     msg: "Login Successful!"
                 })
+                this.$router.push("/dashboard/");
             } catch (err) {
                 this.$toasted.global.defaultError({
                     msg: "Login failed"
