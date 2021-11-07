@@ -1,13 +1,31 @@
 <template>
   <div>
     <Nav />
-    <b-container>
-        <b-row>
-            <b-col>
-                <p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed mattis est, at efficitur lorem. Quisque pharetra rutrum nibh sodales placerat. Donec eleifend euismod quam, id iaculis felis sollicitudin vitae. Duis est elit, viverra vel est fringilla, suscipit congue eros. Sed tempus, elit sed ornare volutpat, erat nunc pulvinar diam, non condimentum lectus dui ut dui. Duis justo nibh, fermentum non luctus in, efficitur at metus. Quisque aliquam tempus sagittis. Etiam enim quam, vulputate eu lorem nec, euismod aliquam lorem. Nulla fringilla auctor metus. Vestibulum in erat risus. Nullam arcu erat, lacinia id nisi sed, laoreet malesuada lacus. Vestibulum dapibus feugiat dictum. Integer mattis, nisi sit amet dictum tristique, magna neque convallis turpis, non convallis lacus mauris nec nunc. In ac nunc tempus, interdum enim ut, elementum nulla. Fusce malesuada, eros ac gravida sodales, massa libero commodo risus, ut tincidunt nibh nulla eget odio. </p>
-            </b-col>
-        </b-row>
-    </b-container>
+        <b-container>
+            <b-row class="d-flex justify-content-center">
+                <b-col cols="12" md="4">
+                    <b-card class="p-3 mt-5 rounded" style="background-color: rgba(245, 245, 245, 0.3); ">
+                      <div id="HASH" class="card-block special-card">
+                      <span>
+                        <b-button
+                            variant="primary"
+                            href="/signUp">
+                            Sign Up
+                        </b-button>
+                      </span>
+                      <span>
+                        <b-button
+                            variant="primary"
+                            href="/login">
+                            Login
+                        </b-button>
+                      </span>
+                      </div>
+                    </b-card>
+                </b-col>
+            </b-row>
+        </b-container>
+
   </div>
 </template>
 
@@ -16,3 +34,15 @@ export default {
   auth: 'guest'
 }
 </script>
+
+<style>
+body {
+  background-image: url('https://www.chicagotribune.com/resizer/fDSmU4a0Nyy0Qpmk3uBW3uT1d_Q=/1200x0/top/arc-anglerfish-arc2-prod-tronc.s3.amazonaws.com/public/CULYIVZ2S5GJZO6HYZKSCAP5VE.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+#HASH {
+  display: flex;
+  justify-content: space-between;
+}
+</style>
