@@ -37,20 +37,15 @@ export default {
         methods: {
            async placeOrder(drink){
                try {
-                let url = ""
-                let context = ""
-                url = `/api/orderDrink/`
-                context = "ordere"
-                console.log(drink.name)
-                console.log(drink.id)
-                await this.$axios.post(url, {
+                await this.$axios.post(`/api/orderDrink/`, {
+                    user_id: this.$auth.user.id,
                     name: drink.name,
-                    id: drink.id
+                    drink_id: drink.id
                 });
                 
                 this.$router.push("/drinks/");
                 this.$toasted.global.defaultSuccess({
-                    msg: `Drink ${context}d`
+                    msg: `Drink ordered`
                 })
             }
             catch (err) {

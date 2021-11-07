@@ -54,8 +54,13 @@ export default {
             altProperty: 'refresh'
           },
           logout: {},
-          user: false
-        }
+          user: {
+            url: '/api/current_user/',
+            method: 'get',
+            propertyName: false,
+          }
+        },
+        
       }
     },
     redirect: {
