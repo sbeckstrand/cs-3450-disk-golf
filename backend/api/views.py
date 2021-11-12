@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core import serializers
 
 # Create your views here.
@@ -97,5 +98,8 @@ def createDrinkOrder(request):
 	except:
 		return Response(status=status.HTTP_400_BAD_REQUEST)
 
-
+# @login_required(login_url='where_to_redirect')
+# @user_passes_test(is_in_group_app1) 
+# def myview(request):
+#     # Do your processing
 	
