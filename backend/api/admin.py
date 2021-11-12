@@ -2,14 +2,8 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
-from api.models import Tournament, Score, Drink, Role, Finance, DrinkOrder
+from api.models import Tournament, Score, Drink, Finance, DrinkOrder
 
-
-
-class RoleInline(admin.StackedInline):
-	model = Role
-	can_delete = False
-	verbose_name_plural = 'role'
 
 class FinanceInline(admin.StackedInline):
 	model = Finance
@@ -17,7 +11,7 @@ class FinanceInline(admin.StackedInline):
 	verbose_name_plural = 'finance'
 	
 class UserAdmin(BaseUserAdmin):
-	inlines = (RoleInline, FinanceInline)
+	inlines = [FinanceInline]
 	
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)

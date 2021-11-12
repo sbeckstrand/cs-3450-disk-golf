@@ -14,7 +14,9 @@
 <script>
 export default {
   created() {
-    console.log(this.$auth.user)
+    if (this.$auth.user.groups.includes("manager")) {
+      console.log(this.$auth.user.groups)
+    } 
   }
 }
 </script>

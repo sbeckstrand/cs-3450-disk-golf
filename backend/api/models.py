@@ -2,16 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 
 User._meta.get_field('email')._unique = True
-
-class Role(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	is_manager = models.BooleanField(default=False)
-	is_drink_maister = models.BooleanField(default=False)
-	is_sponsor = models.BooleanField(default=False)
-	organization = models.CharField(max_length=120)
 	
 class Finance(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name = 'finance', null=True, blank=True)
 	balance = models.PositiveIntegerField(default=0)
 	contribution = models.PositiveIntegerField(default=0)
 	
