@@ -55,7 +55,8 @@ export default {
                 await this.$axios.post('api/signup/', {
                     username: this.user.username,
                     email: this.user.email,
-                    password: this.user.password
+                    password: this.user.password,
+                    groups: "['player']"
                 })
 
                 await this.$auth.loginWith('local', {

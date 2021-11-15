@@ -6,11 +6,12 @@ from rest_framework import viewsets, permissions, status, generics
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from .serializers import DrinkOrderSerializer, TournamentSerializer, ScoreSerializer, DrinkSerializer, UserSerializer
-from .models import DrinkOrder, Tournament, Score, Drink, Role
+from .models import DrinkOrder, Tournament, Score, Drink, Finance
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core import serializers
 
 # Create your views here.
@@ -45,8 +46,20 @@ class CurrentUserRetrieve(generics.RetrieveUpdateDestroyAPIView):
 	serializer_class = UserSerializer
 	permission_classes = (permissions.IsAuthenticated,)
 
+	
+
 	def get_object(self):
-		return self.request.user
+		data = {}
+		data["id"] = self.request.user.id
+		data["username"] = self.request.user.username
+		data["email"] = self.request.user.email
+		data["groups"] = self.request.user.groups
+		data["balance"] = self.request.user.finance.balance
+
+		# for group in self.request.user.groups.all():
+		# 	data["groups"].append(group.name)
+
+		return data
 
 
 @api_view(['POST'])
@@ -79,5 +92,8 @@ def createDrinkOrder(request):
 	except:
 		return Response(status=status.HTTP_400_BAD_REQUEST)
 
-
+# @login_required(login_url='where_to_redirect')
+# @user_passes_test(is_in_group_app1) 
+# def myview(request):
+#     # Do your processing
 	
