@@ -26,9 +26,14 @@ class DrinkOrderSerializer(serializers.ModelSerializer):
 		model = DrinkOrder
 		fields = ("id", "drink", "client")
 
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Group
+        fields = ('name',)
+
 class UserSerializer(serializers.ModelSerializer):
 	password = serializers.CharField(write_only=True)
-	groups = serializers.CharField()
+	groups = GroupSerializer(many=True)
 	balance = serializers.IntegerField(source='finance.balance', required=False)
 
 	def create(self, data):

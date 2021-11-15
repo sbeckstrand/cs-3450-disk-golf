@@ -53,17 +53,11 @@ class CurrentUserRetrieve(generics.RetrieveUpdateDestroyAPIView):
 		data["id"] = self.request.user.id
 		data["username"] = self.request.user.username
 		data["email"] = self.request.user.email
-		data["test"] = "test"
-		data["groups"] = []
+		data["groups"] = self.request.user.groups
 		data["balance"] = self.request.user.finance.balance
 
-		print(self.request.user.finance.balance)
-
-		for group in self.request.user.groups.all():
-			data["groups"].append(group.name)
-
-
-		print(data)
+		# for group in self.request.user.groups.all():
+		# 	data["groups"].append(group.name)
 
 		return data
 

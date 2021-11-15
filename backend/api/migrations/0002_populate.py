@@ -16,6 +16,7 @@ def populate_db(apps, schema_editor):
         Group(name=u'player'),
         Group(name=u'manager'),
         Group(name=u'drink_meister'),
+		Group(name=u'sponsor')
     ])
 
 	# Add tournaments
