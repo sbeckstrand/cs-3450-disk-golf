@@ -30,10 +30,11 @@ class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model= Group
         fields = ('name',)
+	
 
 class UserSerializer(serializers.ModelSerializer):
 	password = serializers.CharField(write_only=True)
-	groups = GroupSerializer(many=True)
+	groups = GroupSerializer(many=True, required=False)
 	balance = serializers.IntegerField(source='finance.balance', required=False)
 
 	def create(self, data):
