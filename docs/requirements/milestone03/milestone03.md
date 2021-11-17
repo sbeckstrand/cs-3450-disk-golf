@@ -40,11 +40,11 @@ Located at [/docs/standup-reports](/docs/standup-reports)
 
 ### 3. Sprint Retrospective Reports
 
-[Sprint 3](/docs/planning/sprint03/plan.md)
+[Sprint 3](/docs/planning/sprint03/retrospective.md)
 
-[Sprint 4](/docs/planning/sprint03/plan.md)
+[Sprint 4](/docs/planning/sprint04/retrospective.md)
 
-[Sprint 5](/docs/planning/sprint03/plan.md)
+[Sprint 5](/docs/planning/sprint05/retrospective.md)
 
 ### 4. 70-80% of Application Completed
 
