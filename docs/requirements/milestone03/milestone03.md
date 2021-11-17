@@ -116,6 +116,8 @@ Located at [/docs/standup-reports](/docs/standup-reports)
 
 ### 5. Unit Tests Covering major logic
 
+Unit tests have been created under `/backend/api/tests.py`. Steps on how to execute the unit tests can be found in the [README](/README.md)
+
 ### 6. Updated Documentation
 
 
