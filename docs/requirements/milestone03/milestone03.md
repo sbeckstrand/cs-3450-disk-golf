@@ -40,29 +40,19 @@ Located at [/docs/standup-reports](/docs/standup-reports)
 
 ### 3. Sprint Retrospective Reports
 
-Sprint 3 Retrospective Report <link>
+[Sprint 3](/docs/planning/sprint03/plan.md)
 
-Sprint 4 Retrospective Report <link>
+[Sprint 4](/docs/planning/sprint03/plan.md)
 
-Sprint 5 Retrospective Report <link>
+[Sprint 5](/docs/planning/sprint03/plan.md)
 
 ### 4. 70-80% of Application Completed
 
 ### 5. Unit Tests Covering major logic
 
-## 6. Refined Systems Design
+### 6. Updated Documentation
 
-### 7. Refinded Requirements Definition document
 
-As needed. If no changes necessary, we can state so. 
-
-### 8. Refined System Analysis
-
-As needed. If no changes necessary, we can state so. 
-
-### 9. Refined Project Plan
-
-As needed. If no changes necessary, we can state so. 
 
 
 
