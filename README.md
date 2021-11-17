@@ -68,10 +68,19 @@ npm run dev
 ```
 
 ## Unit testing instructions
-	--TODO--
 
-## System testing instructions
-	--TODO--
+Unit tests exist under `/backend/api/tests.py`
+
+Currently unit tests exist to check valid creation of object types: User, Tournament, Drink, DrinkOrder
+
+Tests can be run by issuing the following command from the backend directory: 
+
+```
+python manage.py test
+```
+
+
+
 	
 ## Other development notes, as needed
 	
