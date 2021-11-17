@@ -13,6 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core import serializers
+from ast import literal_eval
 
 # Create your views here.
 class TournamentViewSet(viewsets.ModelViewSet):
@@ -67,8 +68,9 @@ class CurrentUserRetrieve(generics.RetrieveUpdateDestroyAPIView):
 @permission_classes([])
 @csrf_exempt
 def create_auth(request):
+
 	serialized = UserSerializer(data=request.data)
-	
+
 	if serialized.is_valid():
 		serialized.create(request.data)
 		return Response(serialized.data, status=status.HTTP_201_CREATED)
