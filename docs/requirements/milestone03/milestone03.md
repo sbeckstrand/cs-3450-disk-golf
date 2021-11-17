@@ -104,7 +104,7 @@ Located at [/docs/standup-reports](/docs/standup-reports)
 
     ### Non-Functional Requirements
 
-    1. ~~The system must user a database~~
+    ~~1. The system must user a database~~
     a. ~~The system’s database must store user account information, including Username, Password, and Account Balance.~~
     b. ~~The system must store information about the tournaments represented in the system.~~
     i. ~~The system must keep track of the individual users within the tournament by representing them with User ID’s.~~
