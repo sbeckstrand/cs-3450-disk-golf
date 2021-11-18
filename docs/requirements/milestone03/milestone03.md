@@ -120,7 +120,9 @@ Unit tests have been created under `/backend/api/tests.py`. Steps on how to exec
 
 ### 6. Updated Documentation
 
+README document has been updated to reflect steps for unit tests and deployment. 
 
+No changes are necessary in the requiremnts and plan documents as they are still valid with their contents. 
 
 
 
