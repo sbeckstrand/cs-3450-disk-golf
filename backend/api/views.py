@@ -99,18 +99,26 @@ def createDrinkOrder(request):
 @permission_classes([])
 @csrf_exempt
 def updateRole(request):
-	try:
-		data = request.data
-		print(data)
-		user = User.objects.get(id=data['id'])
-		group = Group.objects.get(name=data['newRole'])
-		group.user_set.add(user)
+	
+		try:
+			data = request.data
+			print(data)
+			user = User.objects.get(id=data['id'])
+			group = Group.objects.get(name=data['newRole'])
+			print(request.method)
+			if data['action'] == 'add':
+				group.user_set.add(user)
+			
+			if data['action'] == 'remove':
+				group.user_set.remove(user)
 
-		return Response(status=status.HTTP_200_OK)
-	except Exception as e:
-		print(e)
+			return Response(status=status.HTTP_200_OK)
+		except Exception as e:
+			
+			print(e)
 
-		return Response(status=status.HTTP_400_BAD_REQUEST)
+			return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
 # @login_required(login_url='where_to_redirect')
 # @user_passes_test(is_in_group_app1) 
