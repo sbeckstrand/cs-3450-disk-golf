@@ -7,7 +7,7 @@ from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from .serializers import DrinkOrderSerializer, TournamentSerializer, ScoreSerializer, DrinkSerializer, UserSerializer
 from .models import DrinkOrder, Tournament, Score, Drink, Finance
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
@@ -93,6 +93,32 @@ def createDrinkOrder(request):
 		return Response(status=status.HTTP_201_CREATED)
 	except:
 		return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PUT'])
+@authentication_classes([])
+@permission_classes([])
+@csrf_exempt
+def updateRole(request):
+	
+		try:
+			data = request.data
+			print(data)
+			user = User.objects.get(id=data['id'])
+			group = Group.objects.get(name=data['newRole'])
+			print(request.method)
+			if data['action'] == 'add':
+				group.user_set.add(user)
+			
+			if data['action'] == 'remove':
+				group.user_set.remove(user)
+
+			return Response(status=status.HTTP_200_OK)
+		except Exception as e:
+			
+			print(e)
+
+			return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
 # @login_required(login_url='where_to_redirect')
 # @user_passes_test(is_in_group_app1) 
