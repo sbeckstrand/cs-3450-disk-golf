@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Nav/>
         <p>ID: {{ user.id }}</p>
         <p>Username: {{ user.username }}</p>
         <p>Email: {{ user.email }}</p>
@@ -14,6 +15,21 @@
 
         <b-button v-if="!user.groups.some(group => group.name === 'sponsor')" variant="success" @click="addRole('sponsor')">Make Sponsor</b-button>
         <b-button v-else variant="danger" @click="removeRole('sponsor')">Remove Sponsor Role</b-button>
+
+        <b-form  @submit.stop.prevent @submit="updateBalance(balance)" class="border border-light p-3 mt-5 rounded bg-white">
+                <label>Update Balance</label>
+                <b-form-input
+                    v-model="balance"
+                    type="number"
+                    required>
+                </b-form-input>
+
+                <b-button class="mt-3"
+                    variant="primary"
+                    type="submit">
+                    Update
+                </b-button>
+            </b-form>
 
     </div>
 </template>
@@ -74,6 +90,34 @@ export default {
                 console.log(err)
                 this.$toasted.global.defaultError({
                     msg: `Failed to remove role.`
+                })       
+            }
+        },
+        async updateBalance(updateAmount) {
+            try {
+                const url = `/api/updateBalance/`
+                let updateAction = ""
+
+                if (updateAmount >= 0) {
+                    updateAction = "add"
+                } else {
+                    updateAction = "substract"
+                }
+
+                await this.$axios.put(url, {
+                    id: this.user.id,
+                    amount: updateAmount,
+                    action: updateAction
+                });
+                this.$toasted.global.defaultSuccess({
+                    msg: `Balance Updated.`
+                })
+                this.user.balance += parseInt(this.balance)
+            }
+            catch (err) {
+                console.log(err)
+                this.$toasted.global.defaultError({
+                    msg: `Failed to update Balance.`
                 })       
             }
         }
