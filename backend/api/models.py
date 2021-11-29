@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.files.storage import FileSystemStorage
+fs = FileSystemStorage(location='/media/photos')
+
 
 User._meta.get_field('email')._unique = True
 	
@@ -39,3 +42,13 @@ class Drink(models.Model):
 class DrinkOrder(models.Model):
 	drink = models.ForeignKey(Drink, on_delete=models.CASCADE)
 	client = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class SponsorLogo(models.Model):
+	sponsor = models.ForeignKey(User, on_delete=models.CASCADE, default=None, unique=True)
+	logo = models.ImageField(upload_to='logos')
+
+class Sponsorship(models.Model):
+	sponsor = models.ForeignKey(User, on_delete=models.CASCADE)
+	tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
+	contribution = models.IntegerField(default=0)
+

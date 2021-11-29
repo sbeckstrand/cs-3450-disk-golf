@@ -46,7 +46,7 @@ pipenv shell
 Install Django and other dependencies for the application
 
 ```
-pipenv install django django-rest-framework djangorestframework-simplejwt django-cors-headers npm
+pipenv install django django-rest-framework djangorestframework-simplejwt django-cors-headers npm Pillow
 ```
 
 Populate database with placeholder data and run application
