@@ -39,28 +39,34 @@ export default {
         methods: {
             async placeOrder(drink){
                 try {
-                    await this.$axios.post(`/api/orderDrink/`, {
-                        user_id: this.$auth.user.id,
-                        name: drink.name,
-                        drink_id: drink.id
-                    });
+                    if (this.user.balance > drink.price) {
+                        await this.$axios.post(`/api/orderDrink/`, {
+                            user_id: this.$auth.user.id,
+                            name: drink.name,
+                            drink_id: drink.id
+                        });
 
-                    await this.$axios.put('/api/updateBalance/', {
-                        id: this.$auth.user.id,
-                        amount: Math.ceil(drink.price),
-                        action: 'subtract'
-                    })
-                    this.user.balance -= Math.ceil(drink.price)
+                        await this.$axios.put('/api/updateBalance/', {
+                            id: this.$auth.user.id,
+                            amount: Math.ceil(drink.price),
+                            action: 'subtract'
+                        })
+                        this.user.balance -= Math.ceil(drink.price)
 
-                    this.$router.push("/drinks/");
-                    this.$toasted.global.defaultSuccess({
-                        msg: `Drink ordered`
-                    })
+                        this.$router.push("/drinks/");
+                        this.$toasted.global.defaultSuccess({
+                            msg: `Drink ordered`
+                        })
+                    } 
+                    else {
+                        throw new Error('Balance is too low')
+                    }
+                    
                 }
                 catch (err) {
                     console.log(err)
                     this.$toasted.global.defaultError({
-                        msg: `Failed to order drink.`
+                        msg: err
                     })       
                 }
             }
