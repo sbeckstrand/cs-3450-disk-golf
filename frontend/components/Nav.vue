@@ -30,7 +30,7 @@
                     </div>
                 </template>
                 <div v-if="$auth.loggedIn">
-                  <b-dropdown-item href="#">Profile</b-dropdown-item>
+                  <b-dropdown-item href="/profile">Profile</b-dropdown-item>
                   <b-dropdown-item href="/logout">Sign Out</b-dropdown-item>
                 </div>
                 <div v-else>
@@ -50,6 +50,7 @@
 
 <script>
 export default {
+
 }
 
 

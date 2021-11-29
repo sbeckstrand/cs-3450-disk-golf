@@ -50,6 +50,7 @@ class CurrentUserRetrieve(generics.RetrieveUpdateDestroyAPIView):
 	
 
 	def get_object(self):
+		print(self.request.user.finance.balance)
 		data = {}
 		data["id"] = self.request.user.id
 		data["username"] = self.request.user.username
@@ -118,6 +119,33 @@ def updateRole(request):
 			print(e)
 
 			return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PUT'])
+@authentication_classes([])
+@permission_classes([])
+@csrf_exempt
+def updateBalance(request):
+
+	try:
+		data = request.data
+		user = User.objects.get(id=data['id'])
+		change = int(data['amount'])
+		if data['action'] == 'add':
+			user.finance.balance += change
+			user.finance.save()
+		
+		if data['action'] == 'subtract':
+			user.finance.balance -= change
+			print("Subtracting")
+			user.finance.save()
+
+		return Response(status=status.HTTP_200_OK)
+	except Exception as e:
+		
+		print(e)
+
+		return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
 
 # @login_required(login_url='where_to_redirect')
