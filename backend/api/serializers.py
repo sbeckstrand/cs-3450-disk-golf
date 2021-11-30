@@ -28,6 +28,17 @@ class DrinkOrderSerializer(serializers.ModelSerializer):
 
 class SponsorshipSerializer(serializers.ModelSerializer):
 
+	def validate(self, data):
+		tournament = data.get('tournament')
+		sponsor = data.get('sponsor')
+
+		entry = Sponsorship.objects.filter(sponsor=sponsor, tournament=tournament).first()
+
+		if entry:
+			raise serializers.ValidationError("Tournament is already sponsored")
+
+		return super().validate(data)
+
 	class Meta:
 		model = Sponsorship
 		fields = ('id', 'sponsor', 'tournament', 'contribution')

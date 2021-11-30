@@ -16,6 +16,7 @@ from django.core import serializers
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
 import traceback
+import os
 
 # Create your views here.
 class TournamentViewSet(viewsets.ModelViewSet):
@@ -89,6 +90,8 @@ class SponsorLogoView(APIView):
 		try:
 			sponsor = User.objects.get(id=request.data['sponsor'])
 			existingLogo = SponsorLogo.objects.get(sponsor=sponsor)
+			print("/media/%s" % existingLogo.logo)
+			os.remove("media/%s" % existingLogo.logo)
 			existingLogo.delete()
 		except:
 			pass
