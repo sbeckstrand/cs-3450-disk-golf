@@ -39,7 +39,7 @@ export default {
         methods: {
             async placeOrder(drink){
                 try {
-                    if (this.user.balance > drink.price) {
+                    if (this.user.balance >= drink.price) {
                         await this.$axios.post(`/api/orderDrink/`, {
                             user_id: this.$auth.user.id,
                             name: drink.name,

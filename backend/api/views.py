@@ -5,15 +5,18 @@ from django.http import HttpResponse
 from rest_framework import viewsets, permissions, status, generics
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
-from .serializers import DrinkOrderSerializer, TournamentSerializer, ScoreSerializer, DrinkSerializer, UserSerializer
-from .models import DrinkOrder, Tournament, Score, Drink, Finance
+from .serializers import DrinkOrderSerializer, SponsorLogoSerializer, SponsorshipSerializer, TournamentSerializer, ScoreSerializer, DrinkSerializer, UserSerializer
+from .models import DrinkOrder, SponsorLogo, Tournament, Score, Drink, Finance, Sponsorship
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core import serializers
-from ast import literal_eval
+from rest_framework.views import APIView
+from rest_framework.parsers import MultiPartParser, FormParser
+import traceback
+import os
 
 # Create your views here.
 class TournamentViewSet(viewsets.ModelViewSet):
@@ -34,6 +37,16 @@ class DrinkViewSet(viewsets.ModelViewSet):
 class DrinkOrderViewSet(viewsets.ModelViewSet):
 	serializer_class = DrinkOrderSerializer
 	queryset = DrinkOrder.objects.all()
+	permission_classes = (permissions.IsAuthenticated,)
+
+class SponsorshipViewSet(viewsets.ModelViewSet):
+	serializer_class = SponsorshipSerializer
+	queryset = Sponsorship.objects.all()
+	permission_classes = (permissions.IsAuthenticated,)
+
+class SponsorLogoViewSet(viewsets.ModelViewSet):
+	serializer_class = SponsorLogoSerializer
+	queryset = SponsorLogo.objects.all()
 	permission_classes = (permissions.IsAuthenticated,)
 
 # Currently returning all users, not sure how to limit the query to requested user
@@ -63,6 +76,33 @@ class CurrentUserRetrieve(generics.RetrieveUpdateDestroyAPIView):
 
 		return data
 
+class SponsorLogoView(APIView):
+	parser_classes = (MultiPartParser, FormParser)
+
+	def get(self, request, *args, **kwargs):
+		logos = SponsorLogo.objects.all()
+		serializer = SponsorLogoSerializer(logos, many=True)
+		return Response(serializer.data)
+
+	def put(self, request, *args, **kwargs):
+		logo_serializer = SponsorLogoSerializer(data=request.data)
+		
+		try:
+			sponsor = User.objects.get(id=request.data['sponsor'])
+			existingLogo = SponsorLogo.objects.get(sponsor=sponsor)
+			print("/media/%s" % existingLogo.logo)
+			os.remove("media/%s" % existingLogo.logo)
+			existingLogo.delete()
+		except:
+			pass
+
+
+		if logo_serializer.is_valid():
+			logo_serializer.save()
+			return Response(logo_serializer.data, status=status.HTTP_201_CREATED)
+		else:
+			return Response(logo_serializer.errors, status=status.HTTP_400_BAD_REQUEST)		
+		
 
 @api_view(['POST'])
 @authentication_classes([])

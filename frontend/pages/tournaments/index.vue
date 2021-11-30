@@ -7,7 +7,7 @@
             </b-button>
         </div>
         <div v-for="tournament in tournaments" :key="tournament.id">
-            {{ tournament }} 
+            <a :href="`tournaments/${tournament.id}`">{{ tournament }}</a>
             <b-button class="mt-3"
                 variant="danger"
                 @click="delTournament(tournament)">
