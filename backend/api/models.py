@@ -17,6 +17,7 @@ class Tournament(models.Model):
 	holes = models.PositiveIntegerField()
 	participants = models.PositiveIntegerField()
 	startDate = models.DateTimeField('Start Date')
+	active = models.BooleanField(default=True)
 	
 	def __str__(self):
 		return "{}".format(self.name)
@@ -51,4 +52,8 @@ class Sponsorship(models.Model):
 	sponsor = models.ForeignKey(User, on_delete=models.CASCADE)
 	tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
 	contribution = models.IntegerField(default=0)
+
+class Participant(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
 

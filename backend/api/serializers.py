@@ -1,12 +1,12 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User, Group
-from .models import DrinkOrder, SponsorLogo, Sponsorship, Tournament, Score, Drink, Finance
+from .models import DrinkOrder, Participant, SponsorLogo, Sponsorship, Tournament, Score, Drink, Finance
 
 class TournamentSerializer(serializers.ModelSerializer):
 	
 	class Meta: 
 		model = Tournament
-		fields = ("id", "name", "description", "holes", "participants", "startDate")
+		fields = ("id", "name", "description", "holes", "participants", "startDate", "active")
 		
 class ScoreSerializer(serializers.ModelSerializer):
 	
@@ -25,6 +25,12 @@ class DrinkOrderSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = DrinkOrder
 		fields = ("id", "drink", "client")
+
+class ParticipantSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = Participant
+		fields = ("id", "user", "tournament")
 
 class SponsorshipSerializer(serializers.ModelSerializer):
 
