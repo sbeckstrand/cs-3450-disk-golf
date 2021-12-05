@@ -5,8 +5,8 @@ from django.http import HttpResponse
 from rest_framework import viewsets, permissions, status, generics
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
-from .serializers import DrinkOrderSerializer, SponsorLogoSerializer, SponsorshipSerializer, TournamentSerializer, ScoreSerializer, DrinkSerializer, UserSerializer
-from .models import DrinkOrder, SponsorLogo, Tournament, Score, Drink, Finance, Sponsorship
+from .serializers import DrinkOrderSerializer, ParticipantSerializer, SponsorLogoSerializer, SponsorshipSerializer, TournamentSerializer, ScoreSerializer, DrinkSerializer, UserSerializer
+from .models import DrinkOrder, Participant, SponsorLogo, Tournament, Score, Drink, Finance, Sponsorship
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
@@ -28,6 +28,20 @@ class ScoreViewSet(viewsets.ModelViewSet):
 	serializer_class = ScoreSerializer
 	queryset = Score.objects.all()
 	permission_classes = (permissions.IsAuthenticated,)
+
+	def get_queryset(self):
+		queryResult = Score.objects.all()
+		if (self.request.query_params.get('user')):
+			userID = self.request.query_params.get('user')
+			queryResult = Score.objects.filter(player=userID)
+		elif (self.request.query_params.get('tournament')):
+			tournamentID = self.request.query_params.get('tournament')
+			queryResult = Score.objects.filter(tournament=tournamentID)
+		elif (self.request.query_params.get('id')):
+			scoreID = self.request.query_params.get('id')
+			queryResults = Score.objects.filter(id=id)
+		
+		return queryResult
 	
 class DrinkViewSet(viewsets.ModelViewSet):
 	serializer_class = DrinkSerializer
@@ -48,6 +62,18 @@ class SponsorLogoViewSet(viewsets.ModelViewSet):
 	serializer_class = SponsorLogoSerializer
 	queryset = SponsorLogo.objects.all()
 	permission_classes = (permissions.IsAuthenticated,)
+	
+class ParticipantViewSet(viewsets.ModelViewSet):
+	serializer_class = ParticipantSerializer
+	queryset = Participant.objects.all()
+	permission_classes = (permissions.IsAuthenticated,)
+
+	def get_queryset(self):
+		userID = self.request.query_params.get('user')
+		
+		queryResult = Participant.objects.filter(user=userID)
+		
+		return queryResult
 
 # Currently returning all users, not sure how to limit the query to requested user
 class UserViewSet(viewsets.ModelViewSet):
@@ -193,3 +219,25 @@ def updateBalance(request):
 # def myview(request):
 #     # Do your processing
 	
+@api_view(['PUT'])
+@authentication_classes([])
+@permission_classes([])
+@csrf_exempt
+def toggleTournamentActive(request):
+
+	try:
+		data = request.data
+		tournament = Tournament.objects.get(id=data['id'])
+		if tournament.active == False:
+			tournament.active = True
+			tournament.save()
+		elif tournament.active == True:
+			tournament.active = False
+			tournament.save()
+
+		return Response(status=status.HTTP_200_OK)
+	except Exception as e:
+		
+		print(e)
+
+		return Response(status=status.HTTP_400_BAD_REQUEST)
