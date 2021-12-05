@@ -1,30 +1,31 @@
 <template>
   <div>
     <Nav/>
-    <h3>Balance: {{ user.balance }}</h3>
-    <b-row>
-        <div v-for="drink in drinks" :key="drink.name">
+    <b-container>
+        <b-row>
             <b-col>
-                <b-card
-                    :title= "drink.name"
-                    tag="article"
-                    style="max-width: 20rem;"
-                    class="mb-2"
-                >
-                    <b-card-text>
-                        ${{drink.price}}
-                    </b-card-text>
-                    <b-card-text>
-                        {{drink.description}}
-                    </b-card-text>
-                    <b-card-text>
-                        Type: {{drink.type}}
-                    </b-card-text>
+                <h5 class="mt-5">Balance: ${{ user.balance }}</h5>
+                <h3>Drinks</h3>
+                <b-list-group>
+                    <b-list-group-item v-for="drink in drinks" :key="drink.name">
+                        <p><b>Name:</b> {{ drink.name }}</p>
+                        <p><b>Description:</b> {{ drink.description }}</p>
+                        <p><b>Price:</b> {{ drink.price }}</p>
+                        <b-button @click="placeOrder(drink)" variant="primary">Order</b-button>
+                    </b-list-group-item>
+                </b-list-group>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col>
+                
+            </b-col>
+        </b-row>
+    </b-container>
 
-                    <b-button @click="placeOrder(drink)" variant="primary">Order</b-button>
-                </b-card>
-            </b-col> 
-        </div>
+    
+    <b-row>
+        
     </b-row>
   </div>
 </template>
@@ -54,9 +55,6 @@ export default {
                         this.user.balance -= Math.ceil(drink.price)
 
                         this.$router.push("/drinks/");
-                        this.$toasted.global.defaultSuccess({
-                            msg: `Drink ordered`
-                        })
                     } 
                     else {
                         throw new Error('Balance is too low')

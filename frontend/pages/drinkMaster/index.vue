@@ -1,25 +1,40 @@
 <template>
   <div>
     <Nav />
-        <div>
-            <b-button href="/drinkMaster/create" class="mt-3">
-                Add drink
-            </b-button>
-        </div>
-        <div v-for="drink in drinks" :key="drink.id">
-            {{ drink }} 
-            <b-button class="mt-3"
-                variant="danger"
-                @click="delDrink(drink)">
-                Delete
-            </b-button>
-            <b-button class="mt-3"
-                variant="secondary"
-                :href="'/drinkMaster/edit/' + drink.id">
-                
-                Edit
-            </b-button>
-        </div>
+    <b-container>
+        <b-row>
+            <b-col>
+                <b-button href="/drinkMaster/create" class="mt-5" variant="success">
+                    Add New Drink
+                </b-button>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col>
+                <b-list-group>
+                    <h3 class="mt-5">Existing Drinks</h3>
+                    <b-list-group-item v-for="drink in drinks" :key="drink.id">
+                        <p><b>Name:</b> {{ drink.name }}</p>
+                        <p><b>Description:</b> {{ drink.description }}</p>
+                        <p><b>Price:</b> {{ drink.price }}</p>
+                        <b-button class="mt-3"
+                            variant="danger"
+                            @click="delDrink(drink)">
+                            Delete
+                        </b-button>
+                        <b-button class="mt-3"
+                            variant="secondary"
+                            :href="'/drinkMaster/edit/' + drink.id">
+                            
+                            Edit
+                        </b-button>
+                    </b-list-group-item>
+                </b-list-group>
+            </b-col>
+        </b-row>
+    </b-container>
+        
+        
         
     </div>
 </template>
