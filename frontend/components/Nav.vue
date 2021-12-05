@@ -9,7 +9,7 @@
         <b-navbar-nav v-if="$auth.loggedIn">
             <b-nav-item href="/dashboard">Dashboard</b-nav-item>
             <b-nav-item href="/drinks">Drinks</b-nav-item>
-            <b-nav-item v-if="$auth.user.groups.some(group => group.name === 'manager')" href="/tournaments">Tournaments</b-nav-item>
+            <b-nav-item href="/tournaments">Tournaments</b-nav-item>
             <!-- TODO add auth to drink Orders and drink master, create drink orders page --->
             <b-nav-item v-if="$auth.user.groups.some(group => group.name === 'drink_meister')" href="/drinkOrders">Drink Orders</b-nav-item>
             <b-nav-item v-if="$auth.user.groups.some(group => group.name === 'drink_meister')" href="/drinkMaster">Drink Meister</b-nav-item>

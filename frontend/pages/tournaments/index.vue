@@ -4,7 +4,7 @@
         <b-container>
             <b-row>
                 <b-col>
-                    <b-button href="/tournaments/create" class="mt-5" variant="success">
+                    <b-button v-if="$auth.user.groups.some(group => group.name === 'manager')" href="/tournaments/create" class="mt-5" variant="success">
                         Create Tournament
                     </b-button>
                 </b-col>

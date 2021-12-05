@@ -33,16 +33,16 @@
                 <b-col>
                     <h3 class="mt-3">Sponsored Tournaments</h3>
                     <b-list-group>
-                        <b-list-group-item v-for="sponsorship in sponsorships" :key="sponsorship.id">
-                            <div v-if="sponsorship.sponsor == $auth.user.id">
+                        <div v-for="sponsorship in sponsorships" :key="sponsorship.id">
+                            <b-list-group-item v-if="sponsorship.sponsor == $auth.user.id">
                                 <div :set="tournament = tournaments.find(element => element.id === sponsorship.tournament)">
                                     <h4>{{ tournament.name }}</h4>
                                     <p>{{ tournament.description }}</p>
                                     <p>{{ sponsorship }}</p>
                                 </div>
                                 <b-button variant="danger" @click="delSponsorship(sponsorship)">Remove Sponsorship</b-button>
-                            </div>
-                        </b-list-group-item>
+                            </b-list-group-item>
+                        </div>
                     </b-list-group>
                     
                 </b-col>

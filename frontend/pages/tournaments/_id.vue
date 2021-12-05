@@ -36,7 +36,7 @@
                         <b-collapse :id="`accordion${score.hole}`" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
                                 <b-card-text></b-card-text>
-                                <b-form  @submit.stop.prevent @submit="updateScore(score)" class="border border-light mt-1 rounded bg-white">
+                                <b-form  @submit.stop.prevent @submit="updateScore(score)">
                                     <label>Score</label>
                                     <b-form-input
                                         v-model="score.value"
@@ -89,11 +89,18 @@
         <b-row>
             <b-col>
                 <h3 class="mt-5">Sponsors</h3>
-                <div v-for="sponsorship in sponsorships" :key="sponsorship.id">
-                    <div v-if="sponsorship.tournament == tournament.id">
-                        <b-img :src="`http://localhost:8000${logos.find(element => element.sponsor = sponsorship.sponsor).logo}`" thumbnail fluid rounded alt="logo"></b-img>
-                    </div>
-                </div>
+            </b-col>
+        </b-row>
+        <b-row>
+            <div v-for="sponsorship in sponsorships" :key="sponsorship.id">
+                
+                <b-col v-if="sponsorship.tournament == tournament.id">
+                    <b-img :src="`http://localhost:8000${logos.find(element => element.sponsor === sponsorship.sponsor).logo}`" thumbnail fluid rounded alt="logo"></b-img>
+                </b-col>
+            </div>
+        </b-row>
+        <b-row>
+            <b-col>
                 <b-button v-if="$auth.user.groups.some(group => group.name === 'sponsor')"
                     class="mt-3"
                     variant="primary" 

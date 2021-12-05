@@ -1,7 +1,7 @@
 <template>
     <div>
         <Nav/>
-        <b-container>
+        <b-container v-if="$auth.user.groups.some(group => group.name === 'manager')">
             <b-row>
                 <b-col>
                     <h3 class="mt-5">Profile Details</h3>
@@ -143,7 +143,7 @@ export default {
             }
         }
     },
-    created() {
+    mounted() {
         if (!this.$auth.user.groups.some(group => group.name === 'manager')) {
             this.$router.push("/dashboard")
         }
