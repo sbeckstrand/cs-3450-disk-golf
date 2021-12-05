@@ -59,6 +59,14 @@ python manage.py runserver
 ### Frontend
 See Nuxt Documentation: https://nuxtjs.org/docs/get-started
 
+1) In a separate terminal window,pane or screen session, change to repository directory
+
+2) Activate the virtual enviornment for the new session
+
+```
+pipenv shell
+```
+
 Install needed Node modules (may need to be run as root):
 
 ```
@@ -66,6 +74,18 @@ cd frontend
 npm install 
 npm run dev
 ```
+
+### General Notes
+
+For the purpose of demonstrating the app's functionality, three default users have been created with different roles
+
+1: User: `manager` Pass: `manager` ID: `1`
+
+2: User: `drinkster` Pass: `drinkster` ID: `2`
+
+3: User: `sponsor` Pass: `sponsor` ID: `3`
+
+Note: 'Manager' role can access other profiles at `/profile/<id>` and change their role assignments
 
 ## Unit testing instructions
 

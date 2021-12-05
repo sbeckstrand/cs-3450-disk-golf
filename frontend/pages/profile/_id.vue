@@ -58,7 +58,6 @@
 <script>
 export default {
     async asyncData({ params, $axios, $auth }) {
-        console.log($auth.user.groups)
         
         if ($auth.user.groups.some(group => group.name === 'manager')) {
             const user = await $axios.$get(`/api/users/${params.id}`)
@@ -68,6 +67,11 @@ export default {
             return {}
         }
 
+    },
+    data() {
+        return {
+            balance: 0
+        }
     },
     methods: {
         async addRole(role) {
@@ -85,7 +89,6 @@ export default {
                 this.user.groups.push({'name': role})
             }
             catch (err) {
-                console.log(err)
                 this.$toasted.global.defaultError({
                     msg: `Failed to update Role.`
                 })       
@@ -108,7 +111,6 @@ export default {
                 })
             }
             catch (err) {
-                console.log(err)
                 this.$toasted.global.defaultError({
                     msg: `Failed to remove role.`
                 })       
@@ -136,7 +138,6 @@ export default {
                 this.user.balance += parseInt(this.balance)
             }
             catch (err) {
-                console.log(err)
                 this.$toasted.global.defaultError({
                     msg: `Failed to update Balance.`
                 })       
