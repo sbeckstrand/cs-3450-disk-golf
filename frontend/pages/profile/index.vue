@@ -57,9 +57,6 @@ export default {
                     amount: updateAmount,
                     action: 'add'
                 });
-                this.$toasted.global.defaultSuccess({
-                    msg: `Balance Updated.`
-                })
                 this.user.balance += parseInt(this.balance)
             }
             catch (err) {

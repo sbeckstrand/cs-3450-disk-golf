@@ -28,6 +28,20 @@ class ScoreViewSet(viewsets.ModelViewSet):
 	serializer_class = ScoreSerializer
 	queryset = Score.objects.all()
 	permission_classes = (permissions.IsAuthenticated,)
+
+	def get_queryset(self):
+		queryResult = Score.objects.all()
+		if (self.request.query_params.get('user')):
+			userID = self.request.query_params.get('user')
+			queryResult = Score.objects.filter(player=userID)
+		elif (self.request.query_params.get('tournament')):
+			tournamentID = self.request.query_params.get('tournament')
+			queryResult = Score.objects.filter(tournament=tournamentID)
+		elif (self.request.query_params.get('id')):
+			scoreID = self.request.query_params.get('id')
+			queryResults = Score.objects.filter(id=id)
+		
+		return queryResult
 	
 class DrinkViewSet(viewsets.ModelViewSet):
 	serializer_class = DrinkSerializer

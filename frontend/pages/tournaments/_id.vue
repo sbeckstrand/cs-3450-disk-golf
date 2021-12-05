@@ -2,6 +2,29 @@
   <div>
         <Nav />
         {{ tournament }}
+        <p>---</p>
+        <h3>Scores</h3>
+        <b-list-group>
+            <b-list-group-item v-for="score in scores" :key="score.id">
+                <p>Hole: {{ score.hole }}</p>
+                <b-form  @submit.stop.prevent @submit="updateScore(score)" class="border border-light mt-1 rounded bg-white">
+                      <label>Score</label>
+                      <b-form-input
+                          v-model="score.value"
+                          type="number"
+                          min="-5"
+                          max="30"
+                          required>
+                      </b-form-input>
+
+                      <b-button class="mt-3"
+                          variant="primary"
+                          type="submit">
+                          Submit
+                      </b-button>
+                    </b-form>
+            </b-list-group-item>
+        </b-list-group>
         <b-button v-if="participation.length < 1" 
             variant="success"
             @click="toggleParticipation()">
@@ -55,6 +78,8 @@ export default {
         const tCurr = await $axios.$get(`/api/tournaments/${params.id}`)
         const s = await $axios.$get(`/api/sponsorships/`)
         const l = await $axios.$get(`/api/logo/`)
+        const scores = await $axios.$get(`/api/scores/?user=${$auth.user.id}`)
+        const tScores = scores.filter(score => score.tournament === tCurr.id)
         let p = await $axios.$get(`/api/participants/?user=${$auth.user.id}`)
         p = p.filter(element => element.tournament === tCurr.id)
         console.log(p)
@@ -63,7 +88,8 @@ export default {
             tournament: tCurr, 
             sponsorships: s,
             logos: l,
-            participation: p
+            participation: p,
+            scores: tScores
         }
     },
     methods: {
@@ -173,6 +199,28 @@ export default {
                         msg: `Failed to disenroll from touranment.` 
                     }) 
                 }
+            }
+        },
+        async updateScore(score) {
+            try {
+                console.log(score)
+                const data = {
+                hole: score.hole,
+                value: score.value,
+                player: score.player,
+                tournament: score.tournament
+                }
+                await this.$axios.$put(`/api/scores/${score.id}/`, data)
+
+                this.$toasted.global.defaultSuccess({
+                    msg: `success.`
+                })   
+        
+            } 
+            catch (err) {
+                this.$toasted.global.defaultError({
+                    msg: `${err}`
+                })   
             }
         }
     }
