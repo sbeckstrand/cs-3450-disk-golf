@@ -1,38 +1,55 @@
 <template>
     <div>
         <Nav/>
+        <b-container>
+            <b-row>
+                <b-col>
+                    <b-form   class="border border-light p-3 mt-5 rounded bg-white" @submit.stop.prevent @submit="uploadImage(file)" >
+                        <div class="mb-3"> 
+                            <label>Logo</label>
+                            <b-form-file 
+                                v-model="file"
+                                type="file" 
+                                name="file" 
+                                accept="image/jpeg, image/png"
+                                class="mb"
+                                required
+                                @change="onFileChange">
+                            </b-form-file>
+                        </div>
 
-        <b-form   class="border border-light p-3 mt-5 rounded bg-white" @submit.stop.prevent @submit="uploadImage(file)" >
-            <div class="mb-3"> 
-                <label>Logo</label>
-                <b-form-file 
-                    v-model="file"
-                    type="file" 
-                    name="file" 
-                    accept="image/jpeg, image/png"
-                    class="mb"
-                    required
-                    @change="onFileChange">
-                </b-form-file>
-            </div>
-
-            <b-button class="mt-3"
-            variant="primary"
-            type="submit">
-                Upload Image
-            </b-button>
-
-        </b-form>
-        <img v-if="logo" :src="`http://localhost:8000${logo.logo}`" />   
-        <h3 class="mt-3">Sponsored Tournaments</h3>
-        <div v-for="sponsorship in sponsorships" :key="sponsorship.id">
-            <div v-if="sponsorship.sponsor == $auth.user.id">
-                <div :set="tournament = tournaments.find(element => element.id = sponsorship.tournament)">
-                    {{ tournament }}
-                </div>
-                <b-button variant="danger" @click="delSponsorship(sponsorship)">Remove Sponsorship</b-button>
-            </div>
-        </div>
+                        <b-button class="mt-3"
+                        variant="primary"
+                        type="submit">
+                            Upload Image
+                        </b-button>
+                    </b-form>
+                </b-col>
+                <b-col>
+                    <b-img v-if="logo" :src="`http://localhost:8000${logo.logo}`" thumbnail fluid rounded center alt="logo" class="mt-5"></b-img> 
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col>
+                    <h3 class="mt-3">Sponsored Tournaments</h3>
+                    <b-list-group>
+                        <b-list-group-item v-for="sponsorship in sponsorships" :key="sponsorship.id">
+                            <div v-if="sponsorship.sponsor == $auth.user.id">
+                                <div :set="tournament = tournaments.find(element => element.id === sponsorship.tournament)">
+                                    <h4>{{ tournament.name }}</h4>
+                                    <p>{{ tournament.description }}</p>
+                                    <p>{{ sponsorship }}</p>
+                                </div>
+                                <b-button variant="danger" @click="delSponsorship(sponsorship)">Remove Sponsorship</b-button>
+                            </div>
+                        </b-list-group-item>
+                    </b-list-group>
+                    
+                </b-col>
+            </b-row>
+        </b-container>
+          
+        
 
     </div>
 </template>
@@ -58,7 +75,7 @@ export default {
     },
     data() {
         return {
-            file: null
+            file: null,
         }
     },
     methods: {
@@ -114,7 +131,7 @@ export default {
             try {
                 const sponsorshipIndex = this.sponsorships.findIndex(s => s.id === sponsorship.id)
                 await this.$axios.delete(`/api/sponsorships/${sponsorship.id}`)
-                this.tournaments.splice(sponsorshipIndex, 1)
+                this.sponsorships.splice(sponsorshipIndex, 1)
                 this.$toasted.global.defaultSuccess({
                     msg: `Removed Sponsorship`
                 })

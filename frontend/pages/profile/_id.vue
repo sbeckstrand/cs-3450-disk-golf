@@ -1,36 +1,57 @@
 <template>
     <div>
         <Nav/>
-        <p>ID: {{ user.id }}</p>
-        <p>Username: {{ user.username }}</p>
-        <p>Email: {{ user.email }}</p>
-        <p>Groups: {{ user.groups }}</p>
-        <p>Balance: {{ user.balance }}</p>
+        <b-container>
+            <b-row>
+                <b-col>
+                    <h3 class="mt-5">Profile Details</h3>
+                    <p><b>Username:</b> {{ user.username}}</p>
+                    <p><b>Email:</b> {{ user.email }}</p>
+                    <p><b>Groups:</b></p>
+                    <b-list-group>
+                        <b-list-group-item v-for="group in user.groups" :key="group.id">
+                            {{ group.name }}
+                        </b-list-group-item>
+                    </b-list-group>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col>
+                    <div v-if="$auth.user.groups.some(group => group.name === 'manager')">
+                        <h3 class="mt-5">Group Control</h3>
+                        <b-button v-if="!user.groups.some(group => group.name === 'drink_meister')" variant="success" @click="addRole('drink_meister')">Add Drink Meister Role</b-button>
+                        <b-button v-else variant="danger" @click="removeRole('drink_meister')">Remove Drink Meister Role</b-button>
 
-        <b-button v-if="!user.groups.some(group => group.name === 'drink_meister')" variant="success" @click="addRole('drink_meister')">Add Drink Meister Role</b-button>
-        <b-button v-else variant="danger" @click="removeRole('drink_meister')">Remove Drink Meister Role</b-button>
+                        <b-button v-if="!user.groups.some(group => group.name === 'manager')" variant="success" @click="addRole('manager')">Make Manager</b-button>
+                        <b-button v-else variant="danger" @click="removeRole('manager')">Remove Manager Role</b-button>
 
-        <b-button v-if="!user.groups.some(group => group.name === 'manager')" variant="success" @click="addRole('manager')">Make Manager</b-button>
-        <b-button v-else variant="danger" @click="removeRole('manager')">Remove Manager Role</b-button>
+                        <b-button v-if="!user.groups.some(group => group.name === 'sponsor')" variant="success" @click="addRole('sponsor')">Make Sponsor</b-button>
+                        <b-button v-else variant="danger" @click="removeRole('sponsor')">Remove Sponsor Role</b-button>
+                    </div>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col>
+                    <h3 class="mt-5">Balance Control</h3>
+                    <p><b>Balance:</b> {{ user.balance }}</p>
+                    <b-form  @submit.stop.prevent @submit="updateBalance(balance)" class="mt-3">
+                        <label>Increase Balance</label>
+                        <b-form-input
+                            v-model="balance"
+                            min="1"
+                            type="number"
+                            required>
+                        </b-form-input>
 
-        <b-button v-if="!user.groups.some(group => group.name === 'sponsor')" variant="success" @click="addRole('sponsor')">Make Sponsor</b-button>
-        <b-button v-else variant="danger" @click="removeRole('sponsor')">Remove Sponsor Role</b-button>
-
-        <b-form  @submit.stop.prevent @submit="updateBalance(balance)" class="border border-light p-3 mt-5 rounded bg-white">
-                <label>Update Balance</label>
-                <b-form-input
-                    v-model="balance"
-                    type="number"
-                    required>
-                </b-form-input>
-
-                <b-button class="mt-3"
-                    variant="primary"
-                    type="submit">
-                    Update
-                </b-button>
-            </b-form>
-
+                        <b-button class="mt-3"
+                            variant="primary"
+                            type="submit">
+                            Update
+                        </b-button>
+                    </b-form>
+                </b-col>
+            </b-row>
+        </b-container>
     </div>
 </template>
 

@@ -1,73 +1,108 @@
 <template>
   <div>
-        <Nav />
-        {{ tournament }}
-        <p>---</p>
-        <h3>Scores</h3>
-        <b-list-group>
-            <b-list-group-item v-for="score in scores" :key="score.id">
-                <p>Hole: {{ score.hole }}</p>
-                <b-form  @submit.stop.prevent @submit="updateScore(score)" class="border border-light mt-1 rounded bg-white">
-                      <label>Score</label>
-                      <b-form-input
-                          v-model="score.value"
-                          type="number"
-                          min="-5"
-                          max="30"
-                          required>
-                      </b-form-input>
+    <Nav />
+    <b-container>
+        <b-row>
+            <b-col>
+                <h3 class="mt-5">Tournament Details</h3>
+                <p><b>Name:</b> {{ tournament.name }}</p>
+                <p><b>Description:</b> {{ tournament.description }}</p>
+                <p><b>Holes:</b> {{ tournament.holes }}</p>
+                <p>
+                    <b>Status: </b> 
+                    <span v-if="tournament.active == true"> Active </span>
+                    <span v-else>Inactive</span>
+                </p>
+                <b-button v-if="participation.length < 1" 
+                    variant="success"
+                    @click="toggleParticipation()">
+                    Participate in Tournament
+                </b-button>
+                <b-button v-else
+                    variant="danger"
+                    @click="toggleParticipation()">
+                    Disenroll from tournament
+                </b-button>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col>
+                <h3 class="mt-5">Scores</h3>
+                <div class="accordion" role="tablist">
+                    <b-card v-for="score in scores" :key="score.id" no-body class="mb-1">
+                        <b-card-header header-tag="header" class="p-1" role="tab">
+                            <b-button block v-b-toggle="`accordion${score.hole}`" variant="info">Hole: {{ score.hole }}</b-button>
+                        </b-card-header>
+                        <b-collapse :id="`accordion${score.hole}`" accordion="my-accordion" role="tabpanel">
+                            <b-card-body>
+                                <b-card-text></b-card-text>
+                                <b-form  @submit.stop.prevent @submit="updateScore(score)" class="border border-light mt-1 rounded bg-white">
+                                    <label>Score</label>
+                                    <b-form-input
+                                        v-model="score.value"
+                                        type="number"
+                                        min="-5"
+                                        max="30"
+                                        required>
+                                    </b-form-input>
 
-                      <b-button class="mt-3"
-                          variant="primary"
-                          type="submit">
-                          Submit
-                      </b-button>
-                    </b-form>
-            </b-list-group-item>
-        </b-list-group>
-        <b-button v-if="participation.length < 1" 
-            variant="success"
-            @click="toggleParticipation()">
-            Participate in Tournament
-        </b-button>
-        <b-button v-else
-            variant="danger"
-            @click="toggleParticipation()">
-            Disenroll from tournament
-        </b-button>
-        <b-button v-if="$auth.user.groups.some(group => group.name === 'manager')"
-            variant="secondary"
-            :href="'/tournaments/edit/' + tournament.id">
-            
-            Edit
-        </b-button>
-        <b-button v-if="$auth.user.groups.some(group => group.name === 'manager')"
-            variant="danger"
-            @click="delTournament(tournament)">
-            Delete
-        </b-button>
-        <b-button v-if="$auth.user.groups.some(group => group.name === 'manager')"
-            variant="info"
-            @click="toggleActive()">
-            <span v-if="tournament.active == true">
-               Mark Tournament as Inactive
-            </span>
-            <span v-if="tournament.active == false">
-               Mark Tournament as Active
-            </span>
-        </b-button>
-        <b-button v-if="$auth.user.groups.some(group => group.name === 'sponsor')"
-            variant="primary" 
-            @click="sponsorTournament()">
-            Sponsor This Tournament
-        </b-button>
-        <h1>Sponsors</h1>
-        <div v-for="sponsorship in sponsorships" :key="sponsorship.id">
-            <div v-if="sponsorship.tournament == tournament.id">
-                {{sponsorship}}
-                <img :src="`http://localhost:8000${logos.find(element => element.sponsor = sponsorship.sponsor).logo}`" />
-            </div>
-        </div>
+                                    <b-button class="mt-3"
+                                        variant="primary"
+                                        type="submit">
+                                        Submit
+                                    </b-button>
+                                </b-form>
+                            </b-card-body>
+                        </b-collapse>
+                    </b-card>
+                </div>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col>
+                <div v-if="$auth.user.groups.some(group => group.name === 'manager')">
+                    <h3 class="mt-5">Management Control</h3>
+                    <b-button v-if="$auth.user.groups.some(group => group.name === 'manager')"
+                        variant="secondary"
+                        :href="'/tournaments/edit/' + tournament.id">
+                        
+                        Edit
+                    </b-button>
+                    <b-button v-if="$auth.user.groups.some(group => group.name === 'manager')"
+                        variant="danger"
+                        @click="delTournament(tournament)">
+                        Delete
+                    </b-button>
+                    <b-button v-if="$auth.user.groups.some(group => group.name === 'manager')"
+                        variant="info"
+                        @click="toggleActive()">
+                        <span v-if="tournament.active == true">
+                        Mark Tournament as Inactive
+                        </span>
+                        <span v-if="tournament.active == false">
+                        Mark Tournament as Active
+                        </span>
+                    </b-button>
+                </div> 
+            </b-col>
+        </b-row> 
+        <b-row>
+            <b-col>
+                <h3 class="mt-5">Sponsors</h3>
+                <div v-for="sponsorship in sponsorships" :key="sponsorship.id">
+                    <div v-if="sponsorship.tournament == tournament.id">
+                        <b-img :src="`http://localhost:8000${logos.find(element => element.sponsor = sponsorship.sponsor).logo}`" thumbnail fluid rounded alt="logo"></b-img>
+                    </div>
+                </div>
+                <b-button v-if="$auth.user.groups.some(group => group.name === 'sponsor')"
+                    class="mt-3"
+                    variant="primary" 
+                    @click="sponsorTournament()">
+                    Sponsor This Tournament
+                </b-button>
+            </b-col>
+        </b-row>
+    </b-container>   
   </div>
 </template>
 
