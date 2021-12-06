@@ -22,27 +22,34 @@
             </b-form-textarea>
         </div>
         
-        <label>Holes</label>
+        <label class="mt-3">Holes</label>
         <b-form-input
             v-model="editableTournament.holes"
             type="number"
             required>
         </b-form-input>
 
-        <label>Participants</label>
+        <label class="mt-3">Participants</label>
         <b-form-input
             v-model="editableTournament.participants"
             type="number"
             required>
         </b-form-input>
 
-        <label>Start Date</label>
+        <label class="mt-3">Prize Pool</label>
+        <b-form-input
+            v-model="editableTournament.pool"
+            type="number"
+            required>
+        </b-form-input>
+
+        <label class="mt-3">Start Date</label>
         <b-form-datepicker
             v-model="editableTournament.startDate"
             required>
         </b-form-datepicker>
 
-        <label>Start Time</label>
+        <label class="mt-3">Start Time</label>
         <b-form-timepicker
             v-model="editableTournament.startTime"
             required>
@@ -90,6 +97,7 @@ export default {
                         name: this.tournament.name,
                         description: this.tournament.description,
                         holes: this.tournament.holes,
+                        pool: this.tournament.pool,
                         participants: this.tournament.participants,
                         startDate: this.tournament.startDate + " " + this.tournament.startTime
                     });
@@ -104,7 +112,13 @@ export default {
                         startDate: this.tournament.startDate + " " + this.tournament.startTime
                     });
                 }
-                this.$router.push("/tournaments/");
+                if (context === "edite") {
+                    this.$router.push(`/tournaments/${this.tournament.id}`);
+                } 
+                else {
+                    this.$router.push(`/tournaments/`)
+                }
+                
                 this.$toasted.global.defaultSuccess({
                     msg: `Tournament ${context}d`
                 })

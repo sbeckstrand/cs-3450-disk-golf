@@ -6,7 +6,7 @@ class TournamentSerializer(serializers.ModelSerializer):
 	
 	class Meta: 
 		model = Tournament
-		fields = ("id", "name", "description", "holes", "participants", "startDate", "active")
+		fields = ("id", "name", "description", "holes", "participants", "startDate", "active", "pool")
 		
 class ScoreSerializer(serializers.ModelSerializer):
 	
