@@ -18,6 +18,7 @@ class Tournament(models.Model):
 	participants = models.PositiveIntegerField()
 	startDate = models.DateTimeField('Start Date')
 	active = models.BooleanField(default=True)
+	pool = models.PositiveIntegerField(default=0)
 	
 	def __str__(self):
 		return "{}".format(self.name)

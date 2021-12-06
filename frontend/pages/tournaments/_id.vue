@@ -8,6 +8,7 @@
                 <p><b>Name:</b> {{ tournament.name }}</p>
                 <p><b>Description:</b> {{ tournament.description }}</p>
                 <p><b>Holes:</b> {{ tournament.holes }}</p>
+                <p><b>Prize Pool:</b> ${{tournament.pool }}</p>
                 <p>
                     <b>Status: </b> 
                     <span v-if="tournament.active == true"> Active </span>
