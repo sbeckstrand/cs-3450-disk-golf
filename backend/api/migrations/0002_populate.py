@@ -33,9 +33,9 @@ def populate_db(apps, schema_editor):
 	t2Participants = 10
 	t2StartDate = "2021-10-05 10:00:00+00:00"
 	
-	tournament1 = Tournament(name=t1Title,description=t1Description,holes=t1Holes,participants=t1Participants,startDate=t1StartDate)
+	tournament1 = Tournament(name=t1Title,description=t1Description,holes=t1Holes,participants=t1Participants,startDate=t1StartDate,active=True,pool=1000)
 	
-	tournament2 = Tournament(name=t2Title,description=t2Description,holes=t2Holes,participants=t2Participants,startDate=t2StartDate)
+	tournament2 = Tournament(name=t2Title,description=t2Description,holes=t2Holes,participants=t2Participants,startDate=t2StartDate,active=True,pool=200)
 	
 	tournament1.save()
 	tournament2.save()
