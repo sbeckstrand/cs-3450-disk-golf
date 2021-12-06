@@ -61,6 +61,12 @@
         </b-row>
         <b-row>
             <b-col>
+                <h3 class="mt-5">Leaderboards</h3>
+                <b-table striped hover :items="leaderboard" :fields="['name','total']" ></b-table>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col>
                 <div v-if="$auth.user.groups.some(group => group.name === 'manager')">
                     <h3 class="mt-5">Management Control</h3>
                     <b-button v-if="$auth.user.groups.some(group => group.name === 'manager')"
@@ -118,21 +124,43 @@
 export default {
     async asyncData({ params, $axios, $auth }) {
         const t = await $axios.$get('/api/tournaments/')
+        const u = await $axios.$get('/api/users/')
         const tCurr = await $axios.$get(`/api/tournaments/${params.id}`)
         const s = await $axios.$get(`/api/sponsorships/`)
         const l = await $axios.$get(`/api/logo/`)
-        const scores = await $axios.$get(`/api/scores/?user=${$auth.user.id}`)
-        const tScores = scores.filter(score => score.tournament === tCurr.id)
+        let scores = await $axios.$get(`/api/scores/`)
+        const tScores = scores.filter(score => score.tournament === tCurr.id && score.player === $auth.user.id)
         let p = await $axios.$get(`/api/participants/?user=${$auth.user.id}`)
         p = p.filter(element => element.tournament === tCurr.id)
-        console.log(p)
+        
+        scores = scores.filter(s => s.tournament === tCurr.id)
+        const lb = []
+        for (const score in scores) {
+            const currScore = scores[score]
+            if (lb.filter(lead => lead.player === currScore.player).length !== 1) {
+                const userIndex = u.findIndex(u => u.id === currScore.player)
+                lb.push({
+                    player: currScore.player,
+                    name: u[userIndex].username,
+                    total: currScore.value
+                })
+            } else {
+                const index = lb.findIndex(lead => lead.player === currScore.player)
+                lb[index].total += currScore.value
+            }
+        }
+        lb.sort((p1,p2) => (p1.total > p2.total) ? 1: -1)
+
+
+
         return { 
             tournaments: t,
             tournament: tCurr, 
             sponsorships: s,
             logos: l,
             participation: p,
-            scores: tScores
+            scores: tScores,
+            leaderboard: lb
         }
     },
     methods: {
@@ -254,7 +282,6 @@ export default {
                 tournament: score.tournament
                 }
                 await this.$axios.$put(`/api/scores/${score.id}/`, data)
-
                 this.$toasted.global.defaultSuccess({
                     msg: `success.`
                 })   
