@@ -12,6 +12,9 @@ def populate_db(apps, schema_editor):
 	Group = apps.get_model('auth', 'Group')
 	SponsorLogo = apps.get_model('api', 'SponsorLogo')
 	Finance = apps.get_model('api', 'Finance')
+	Participant = apps.get_model('api', 'Participant')
+	Score = apps.get_model('api', 'Score')
+	Tournament = apps.get_model('api', 'Tournament')
 
 	User = apps.get_model(*settings.AUTH_USER_MODEL.split('.'))
 	
@@ -62,6 +65,39 @@ def populate_db(apps, schema_editor):
 
 	newLogo = SponsorLogo(sponsor=sponsor, logo="logos/mcdonalds.png")
 	newLogo.save()
+
+	tournament1 = Tournament.objects.get(id=1)
+	
+	participant1 = Participant(user=sponsor,tournament=tournament1)
+	participant1.save()
+
+	participant2 = Participant(user=drinkster,tournament=tournament1)
+	participant2.save()
+
+	
+
+	score1 = Score(hole=1,value=2,player=sponsor,tournament=tournament1)
+	score2 = Score(hole=2,value=1,player=sponsor,tournament=tournament1)
+	score3 = Score(hole=3,value=2,player=sponsor,tournament=tournament1)
+	score4 = Score(hole=4,value=0,player=sponsor,tournament=tournament1)
+	score5 = Score(hole=5,value=-1,player=sponsor,tournament=tournament1)
+	score6 = Score(hole=1,value=0,player=drinkster,tournament=tournament1)
+	score7 = Score(hole=2,value=0,player=drinkster,tournament=tournament1)
+	score8 = Score(hole=3,value=2,player=drinkster,tournament=tournament1)
+	score9 = Score(hole=4,value=1,player=drinkster,tournament=tournament1)
+	score10 = Score(hole=5,value=0,player=drinkster,tournament=tournament1)
+
+	score1.save()
+	score2.save()
+	score3.save()
+	score4.save()
+	score5.save()
+	score6.save()
+	score7.save()
+	score8.save()
+	score9.save()
+	score10.save()
+
 
 class Migration(migrations.Migration):
 
